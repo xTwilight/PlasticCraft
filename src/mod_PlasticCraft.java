@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.util.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.forge.MinecraftForgeClient;
+import net.minecraft.src.forge.*;
 
 import org.lwjgl.opengl.GL11;
 
@@ -45,8 +45,6 @@ public class mod_PlasticCraft extends BaseMod {
   public static Item itemIntegratedCircuit = new Item_PC(props.getInt("itemSiliconChip") - iOff).setIconIndex(4).setItemName("pSiliconChip");
   public static Item itemBowlGelatin = new Item_PC(props.getInt("itemGelatinBowl") - iOff).setIconIndex(22).setItemName("pGelatinBowl");
   public static Item itemGelatin = new Item_PC(props.getInt("itemGelatin") - iOff).setIconIndex(23).setItemName("pGelatin");
-  public static Item itemFallBoots = new ItemArmor_PC(props.getInt("armorFallDampeningBoots") - iOff, ModLoader.AddArmor("FallDampener"), 3, 0, 0).setIconIndex(30).setItemName("pFallDampener");
-  public static Item itemNightGoggles = new ItemArmor_PC(props.getInt("armorNightVisionGoggles") - iOff, ModLoader.AddArmor("NVGoggles"), 0, 0, 0).setIconIndex(29).setItemName("pNVGoggles");
   public static Item itemPlasticGoo = new Item_PC(props.getInt("itemGooPlastic") - iOff).setIconIndex(21).setItemName("pGooPlastic");
   public static Item itemRubber = new Item_PC(props.getInt("itemRubberBall") - iOff).setIconIndex(6).setItemName("pRubberBall");
   public static Item itemDuctTape = new Item_PC(props.getInt("itemTape") - iOff).setIconIndex(3).setItemName("pTape");
@@ -64,6 +62,9 @@ public class mod_PlasticCraft extends BaseMod {
   public static Item itemPlasticBottleM = new ItemConsumable(props.getInt("itemMilkBottle") - iOff, 6, 0.6F, true).setIconIndex(19).setItemName("pMilkBottle");
   public static Item itemNeedle = new Item_PC(props.getInt("itemNeedle") - iOff).setIconIndex(16).setItemName("pNeedle");
   public static Item itemNeedleHealth = new ItemConsumable(props.getInt("itemRedNeedle") - iOff, 0, 0, true).setIconIndex(15).setItemName("pHealthNeedle");
+  public static Item armorNightGoggles = new ItemArmor_PC(props.getInt("armorNightVisionGoggles") - iOff, mod_PlasticCraft.UTILITY, ModLoader.AddArmor("NVGoggles"), 0).setIconIndex(29).setItemName("pNVGoggles");
+  public static Item armorReinforcedVest = new ItemArmor_PC(props.getInt("armorReinforcedVest") - iOff, mod_PlasticCraft.KEVLAR, ModLoader.AddArmor("Plastic"), 1).setIconIndex(31).setItemName("pReinforcedVest");
+  public static Item armorFallBoots = new ItemArmor_PC(props.getInt("armorFallDampeningBoots") - iOff, mod_PlasticCraft.UTILITY, ModLoader.AddArmor("FallDampener"), 3).setIconIndex(30).setItemName("pFallDampener");
   // Booleans
   public static int c4Power = props.getInt("c4Power");
   public static int c4Fuse = props.getInt("c4Fuse") * 20;
@@ -86,6 +87,9 @@ public class mod_PlasticCraft extends BaseMod {
   private static ArrayList class4 = new ArrayList(Arrays.asList(new Item[] {
     Item.swordDiamond, Item.shovelDiamond, Item.pickaxeDiamond, Item.axeDiamond, Item.hoeDiamond, Item.helmetDiamond, Item.plateDiamond, Item.legsDiamond, Item.bootsDiamond
   }));
+  
+  private static EnumArmorMaterial UTILITY = EnumHelper.addArmorMaterial("Utility", 0, new int[] {0, 0, 0, 0}, 5);
+  private static EnumArmorMaterial KEVLAR = EnumHelper.addArmorMaterial("Kevlar", 50, new int[] {2, 6, 5, 2}, 12);
   
   public void ModsLoaded() {
     MinecraftForgeClient.preloadTexture(itemSheet); 
@@ -177,8 +181,9 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(itemPlasticBottleM, "Milk Bottle");
     ModLoader.AddName(itemNeedle, "Needle");
     ModLoader.AddName(itemNeedleHealth, "Health Needle");
-    ModLoader.AddName(itemFallBoots, "Shock-Absorbing Boots");
-    ModLoader.AddName(itemNightGoggles, "Night-Vision Goggles");
+    ModLoader.AddName(armorNightGoggles, "Night-Vision Goggles");
+    ModLoader.AddName(armorReinforcedVest, "Reinforced Vest");
+    ModLoader.AddName(armorFallBoots, "Shock-Absorbing Boots");
   }
 
   public static void addRecipes() {
@@ -207,10 +212,12 @@ public class mod_PlasticCraft extends BaseMod {
       'P', blockPlastic, 'F', Block.stoneOvenIdle, 'E', blockTap, 'X', itemIntegratedCircuit });
     
     // Items
-    ModLoader.AddRecipe(new ItemStack(itemFallBoots), new Object[] { " PP", " PC", "OOO", 
-      'P', blockPlastic, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
-    ModLoader.AddRecipe(new ItemStack(itemNightGoggles), new Object[] { "SSS", "S S", "PCP", 
+    ModLoader.AddRecipe(new ItemStack(armorNightGoggles), new Object[] { "SSS", "S S", "PCP", 
       'S', itemSynthString, 'P', Item.diamond, 'C', itemIntegratedCircuit });
+    ModLoader.AddRecipe(new ItemStack(armorReinforcedVest), new Object[] { "S S", "/I/", "SPS", 
+      'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.plateSteel });
+    ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { " PP", " PC", "OOO", 
+      'P', blockPlastic, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(itemPlasticStick, 4), new Object[] { "P", "P", 
       'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(itemSynthString, 4), new Object[] { "PP", 
@@ -387,7 +394,7 @@ public class mod_PlasticCraft extends BaseMod {
   private void enableShockAbsorbing(Minecraft minecraft) {
     ItemStack itemstack = minecraft.thePlayer.inventory.armorItemInSlot(0);
     
-    if (itemstack != null && itemstack.itemID == itemFallBoots.shiftedIndex) {
+    if (itemstack != null && itemstack.itemID == armorFallBoots.shiftedIndex) {
       minecraft.thePlayer.fallDistance = -1F;
       isWearingFallBoots = true;
     } else
@@ -397,7 +404,7 @@ public class mod_PlasticCraft extends BaseMod {
   private void renderNightvisionOverlay(Minecraft minecraft) {
     ItemStack itemstack = minecraft.thePlayer.inventory.armorItemInSlot(3);
         
-    if (!minecraft.gameSettings.hideGUI && itemstack != null && itemstack.itemID == itemNightGoggles.shiftedIndex)
+    if (!minecraft.gameSettings.hideGUI && itemstack != null && itemstack.itemID == armorNightGoggles.shiftedIndex)
       renderTextureOverlay(minecraft, "%blur%/TehKrush/PlasticCraft/guiNightVision" + nightvisionStyle + ".png", 1.0F);
   }
 
@@ -451,8 +458,9 @@ public class mod_PlasticCraft extends BaseMod {
     props.getInt("itemSiliconChip", 1008);
     props.getInt("itemGelatinBowl", 1009);
     props.getInt("itemGelatin", 1010);
-    props.getInt("armorFallDampeningBoots", 1011);
     props.getInt("armorNightVisionGoggles", 1012);
+    props.getInt("armorReinforcedVest", 1030);
+    props.getInt("armorFallDampeningBoots", 1011);
     props.getInt("itemGooPlastic", 1013);
     props.getInt("itemRubberBall", 1014);
     props.getInt("itemTape", 1015);
