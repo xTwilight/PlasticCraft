@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExtractRecipes {
-	private static final ExtractRecipes smeltingBase = new ExtractRecipes();
+  private static final ExtractRecipes smeltingBase = new ExtractRecipes();
   private Map smeltingList;
   private Map extractionList;
   

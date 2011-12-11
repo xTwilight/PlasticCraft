@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
 public class TileEntityMicrowave extends TileEntity implements IInventory {
-	private ItemStack microwaveItemStacks[];
+  private ItemStack microwaveItemStacks[];
   public int microwaveBurnTime;
   public int currentItemBurnTime;
   public int microwaveCookTime;

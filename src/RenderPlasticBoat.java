@@ -3,8 +3,7 @@ package net.minecraft.src;
 import org.lwjgl.opengl.GL11;
 
 public class RenderPlasticBoat extends Render {
-	protected ModelBase boat;
-//  protected ModelBase f;
+  protected ModelBase boat;
     
   public RenderPlasticBoat(){
     shadowSize = 0.5F;
@@ -34,25 +33,4 @@ public class RenderPlasticBoat extends Render {
   public void doRender(Entity entity, double d, double d1, double d2, float f1, float f2) {
     renderBoat((EntityPlasticBoat)entity, d, d1, d2, f1, f2);
   }
-
-// I can't remember why these methods were here, they aren't even called. Meh.
-//  public void a(ModelBase modelbase) {
-//    f = modelbase;
-//  }
-//
-//  public boolean a(EntityPlasticBoat entityplasticboat, int i, float f1) {
-//    if (i == 0) {
-//      a(boat);
-//      GL11.glEnable(2977 /*GL_NORMALIZE*/);
-//      GL11.glEnable(3042 /*GL_BLEND*/);
-//      GL11.glBlendFunc(770, 771);
-//      return true;
-//    }
-//    if (i == 1) {
-//      GL11.glDisable(3042 /*GL_BLEND*/);
-//      GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-//    }
-//    
-//    return false;
-//  }
 }

@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
 public class TileEntityExtract extends TileEntity implements IInventory {
-	private ItemStack extractorItemStacks[];
+  private ItemStack extractorItemStacks[];
   public int extractorBurnTime;
   public int currentItemBurnTime;
   public int extractorCookTime;
@@ -205,6 +205,5 @@ public class TileEntityExtract extends TileEntity implements IInventory {
   }
     
   public void openChest() {}
-
   public void closeChest() {}
 }

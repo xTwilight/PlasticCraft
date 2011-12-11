@@ -11,7 +11,7 @@ import net.minecraft.src.TexturePackList;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
 public class TextureFrameAnimFX extends TextureFX {
-	protected int fileBuffer[];
+  protected int fileBuffer[];
   private int tick;
   private int numFrames;
   private int tileResolution;
@@ -38,12 +38,12 @@ public class TextureFrameAnimFX extends TextureFX {
     } catch(IOException ioexception) {
       ioexception.printStackTrace();
     } catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		}
+      e.printStackTrace();
+    } catch (SecurityException e) {
+      e.printStackTrace();
+    } catch (NoSuchFieldException e) {
+      e.printStackTrace();
+    }
   }
 
   public void onTick() {

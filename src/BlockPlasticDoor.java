@@ -32,6 +32,6 @@ public class BlockPlasticDoor extends BlockDoor implements ITextureProvider {
   }
   
   public String getTextureFile() {
-		return mod_PlasticCraft.blockSheet;
-	}
+    return mod_PlasticCraft.blockSheet;
+  }
 }

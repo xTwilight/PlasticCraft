@@ -149,6 +149,6 @@ public class BlockMicrowave extends BlockContainer implements ITextureProvider {
   }
   
   public String getTextureFile() {
-		return mod_PlasticCraft.blockSheet;
-	}
+    return mod_PlasticCraft.blockSheet;
+  }
 }

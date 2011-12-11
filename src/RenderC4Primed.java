@@ -3,7 +3,7 @@ package net.minecraft.src;
 import org.lwjgl.opengl.GL11;
 
 public class RenderC4Primed extends Render {
-	private RenderBlocks blockRenderer;
+  private RenderBlocks blockRenderer;
 	
   public RenderC4Primed() {
   	blockRenderer = new RenderBlocks();

@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.Random;
 
 public class ItemPlasticBucket extends Item_PC {
-	private int isFull;
+  private int isFull;
 	
   public ItemPlasticBucket(int i, int j) {
     super(i);

@@ -3,8 +3,8 @@ package net.minecraft.src;
 import java.util.List;
 
 public class ContainerMicrowave extends Container {
-	private TileEntityMicrowave microwave;
-	private int lastCookTime;
+  private TileEntityMicrowave microwave;
+  private int lastCookTime;
   private int lastBurnTime;
   private int lastItemBurnTime;
   
@@ -75,7 +75,7 @@ public class ContainerMicrowave extends Container {
       } else if (i >= 30 && i < 39) {
         if (!mergeItemStack(itemstack1, 3, 30, false))
           return null;
-      } else if(!mergeItemStack(itemstack1, 3, 39, false))
+      } else if (!mergeItemStack(itemstack1, 3, 39, false))
         return null;
             
       if (itemstack1.stackSize == 0)

@@ -4,7 +4,7 @@ import java.util.*;
 import net.minecraft.client.Minecraft;
 
 public class BlockC4 extends Block_PC {
-	public static double logbase = 10D;
+  public static double logbase = 10D;
   
   public BlockC4(int i) {
     super(i, Material.tnt);

@@ -42,11 +42,11 @@ public class mod_PlasticCraft extends BaseMod {
   public static Item itemMouldFull = new Item_PC(props.getInt("itemFilledMould") - iOff).setIconIndex(24).setItemName("pFilledMould");
   public static Item itemWoodDust = new Item_PC(props.getInt("itemWoodFlour") - iOff).setIconIndex(0).setItemName("pWoodFlour");
   public static Item itemSynthString = new Item_PC(props.getInt("itemPlasticString") - iOff).setIconIndex(9).setItemName("pPlasticString");
-  public static Item itemSiliconChip = new Item_PC(props.getInt("itemSiliconChip") - iOff).setIconIndex(4).setItemName("pSiliconChip");
+  public static Item itemIntegratedCircuit = new Item_PC(props.getInt("itemSiliconChip") - iOff).setIconIndex(4).setItemName("pSiliconChip");
   public static Item itemBowlGelatin = new Item_PC(props.getInt("itemGelatinBowl") - iOff).setIconIndex(22).setItemName("pGelatinBowl");
   public static Item itemGelatin = new Item_PC(props.getInt("itemGelatin") - iOff).setIconIndex(23).setItemName("pGelatin");
-  public static Item itemFallBoots = new ItemArmor_PC(props.getInt("armorFallDampeningBoots") - iOff, ModLoader.AddArmor("FallDampener"), 3).setIconIndex(30).setItemName("pFallDampener");
-  public static Item itemNightGoggles = new ItemArmor_PC(props.getInt("armorNightVisionGoggles") - iOff, ModLoader.AddArmor("NVGoggles"), 0).setIconIndex(29).setItemName("pNVGoggles");
+  public static Item itemFallBoots = new ItemArmor_PC(props.getInt("armorFallDampeningBoots") - iOff, ModLoader.AddArmor("FallDampener"), 3, 0, 0).setIconIndex(30).setItemName("pFallDampener");
+  public static Item itemNightGoggles = new ItemArmor_PC(props.getInt("armorNightVisionGoggles") - iOff, ModLoader.AddArmor("NVGoggles"), 0, 0, 0).setIconIndex(29).setItemName("pNVGoggles");
   public static Item itemPlasticGoo = new Item_PC(props.getInt("itemGooPlastic") - iOff).setIconIndex(21).setItemName("pGooPlastic");
   public static Item itemRubber = new Item_PC(props.getInt("itemRubberBall") - iOff).setIconIndex(6).setItemName("pRubberBall");
   public static Item itemDuctTape = new Item_PC(props.getInt("itemTape") - iOff).setIconIndex(3).setItemName("pTape");
@@ -64,14 +64,12 @@ public class mod_PlasticCraft extends BaseMod {
   public static Item itemPlasticBottleM = new ItemConsumable(props.getInt("itemMilkBottle") - iOff, 6, 0.6F, true).setIconIndex(19).setItemName("pMilkBottle");
   public static Item itemNeedle = new Item_PC(props.getInt("itemNeedle") - iOff).setIconIndex(16).setItemName("pNeedle");
   public static Item itemNeedleHealth = new ItemConsumable(props.getInt("itemRedNeedle") - iOff, 0, 0, true).setIconIndex(15).setItemName("pHealthNeedle");
-  
   // Booleans
   public static int c4Power = props.getInt("c4Power");
   public static int c4Fuse = props.getInt("c4Fuse") * 20;
-  public static boolean c4Enhanced = props.getBoolean("c4Enhanced");;
+  public static boolean c4Enhanced = props.getBoolean("c4Enhanced");
   private static String nightvisionStyle = props.getString("nightvisionStyle");
   public static boolean isWearingFallBoots;
-  
   static { props.save(); }
   
   // Repair Lists
@@ -159,7 +157,7 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(itemMould, "Mould");
     ModLoader.AddName(itemMouldFull, "Filled Mould");
     ModLoader.AddName(itemSynthString, "Sythetic String");
-    ModLoader.AddName(itemSiliconChip, "Integrated Circuit");
+    ModLoader.AddName(itemIntegratedCircuit, "Integrated Circuit");
     ModLoader.AddName(itemBowlGelatin, "Bowl of Gelatin");
     ModLoader.AddName(itemGelatin, "Gelatin Powder");
     ModLoader.AddName(itemPlasticGoo, "Plastic Goo");
@@ -186,107 +184,107 @@ public class mod_PlasticCraft extends BaseMod {
   public static void addRecipes() {
   	// Blocks
     ModLoader.AddRecipe(new ItemStack(blockPlastic, 1, 0), new Object[] { "PP", "PP", 
-    	'P', itemPlastic });
+      'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(blockPlasticGoo), new Object[] { "PP", "PP", 
-    	'P', itemPlasticGoo });
+      'P', itemPlasticGoo });
     ModLoader.AddRecipe(new ItemStack(blockC4), new Object[] { "GPG", "PCP", "GPG", 
-    	'P', blockPlastic, 'G', Item.gunpowder, 'C', itemSiliconChip });
+      'P', blockPlastic, 'G', Item.gunpowder, 'C', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(blockSynthCloth), new Object[] { "SSS", "SSS", "SSS", 
-    	'S', itemSynthString });
+      'S', itemSynthString });
     ModLoader.AddRecipe(new ItemStack(blockPlexiglass, 1, 0), new Object[] { "PP", "PP", 
-    	'P', itemPlasticClear });
+      'P', itemPlasticClear });
     ModLoader.AddRecipe(new ItemStack(blockPlexiglass, 1, 1), new Object[] { " L ", "LPL", " L ", 
-    	'P', new ItemStack(blockPlexiglass, 1, 0), 'L', Item.lightStoneDust });
+      'P', new ItemStack(blockPlexiglass, 1, 0), 'L', Item.lightStoneDust });
     ModLoader.AddRecipe(new ItemStack(blockTap), new Object[] { "P", "P", "P", 
-    	'P', itemPlastic });
+      'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(blockMicrowaveIdle), new Object[] { "IPI", "GSG", "IPI", 
-    	'P', blockPlastic, 'I', Item.ingotIron, 'G', Block.glass, 'S', itemSiliconChip });
+      'P', blockPlastic, 'I', Item.ingotIron, 'G', Block.glass, 'S', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(blockTrampoline), new Object[] { "RRR", "WWW", 
-    	'R', itemRubber, 'W', Block.planks });
+      'R', itemRubber, 'W', Block.planks });
     ModLoader.AddRecipe(new ItemStack(blockAccelerator, 4), new Object[] { "RXR", "XSX", "RXR", 
-    	'R', itemRubber, 'X', Item.redstone, 'S', itemSiliconChip });
+      'R', itemRubber, 'X', Item.redstone, 'S', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(blockExtractor), new Object[] { "PXP", "PFP", "PEP", 
-    	'P', blockPlastic, 'F', Block.stoneOvenIdle, 'E', blockTap, 'X', itemSiliconChip });
+      'P', blockPlastic, 'F', Block.stoneOvenIdle, 'E', blockTap, 'X', itemIntegratedCircuit });
     
     // Items
     ModLoader.AddRecipe(new ItemStack(itemFallBoots), new Object[] { " PP", " PC", "OOO", 
-    	'P', blockPlastic, 'O', Block.obsidian, 'C', itemSiliconChip });
+      'P', blockPlastic, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(itemNightGoggles), new Object[] { "SSS", "S S", "PCP", 
-    	'S', itemSynthString, 'P', Item.diamond, 'C', itemSiliconChip });
+      'S', itemSynthString, 'P', Item.diamond, 'C', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(itemPlasticStick, 4), new Object[] { "P", "P", 
-    	'P', itemPlastic });
+      'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(itemSynthString, 4), new Object[] { "PP", 
-    	'P', itemPlasticClear });
+      'P', itemPlasticClear });
     ModLoader.AddRecipe(new ItemStack(itemPlasticClear), new Object[] { "P", 
-    	'P', itemPlastic });
+      'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(itemMould), new Object[] { "S S", " S ", 
-    	'S', Block.cobblestone });
+      'S', Block.cobblestone });
     ModLoader.AddShapelessRecipe(new ItemStack(itemMouldFull), new Object[] { 
-    	new ItemStack(itemWoodDust), new ItemStack(Item.egg), new ItemStack(itemMould) });
+      new ItemStack(itemWoodDust), new ItemStack(Item.egg), new ItemStack(itemMould) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemMouldFull), new Object[] {
       new ItemStack(itemWoodDust), new ItemStack(itemGelatin), new ItemStack(itemMould) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemMouldFull), new Object[] { 
-    	new ItemStack(itemWoodDust), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(itemMould) });
+      new ItemStack(itemWoodDust), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(itemMould) });
     ModLoader.AddRecipe(new ItemStack(itemWoodDust, 4), new Object[] { "W", 
-    	'W', Block.planks });
-    ModLoader.AddRecipe(new ItemStack(itemSiliconChip, 2), new Object[] { "SFS", "IRI", "PPP", 
-    	'F', blockSynthCloth, 'I', Item.ingotIron, 'R', Item.redstoneRepeater, 'P', blockPlastic, 'S', itemSilicon });
+      'W', Block.planks });
+    ModLoader.AddRecipe(new ItemStack(itemIntegratedCircuit, 2), new Object[] { "SFS", "IRI", "PPP", 
+      'F', blockSynthCloth, 'I', Item.ingotIron, 'R', Item.redstoneRepeater, 'P', blockPlastic, 'S', itemSilicon });
     ModLoader.AddShapelessRecipe(new ItemStack(itemBowlGelatin), new Object[] { 
-    	new ItemStack(Item.beefRaw), new ItemStack(Item.bowlEmpty) });
+      new ItemStack(Item.beefRaw), new ItemStack(Item.bowlEmpty) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemBowlGelatin), new Object[] { 
-    	new ItemStack(Item.chickenRaw), new ItemStack(Item.bowlEmpty) });
+      new ItemStack(Item.chickenRaw), new ItemStack(Item.bowlEmpty) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemBowlGelatin), new Object[] { 
-    	new ItemStack(Item.porkRaw), new ItemStack(Item.bowlEmpty) });
+      new ItemStack(Item.porkRaw), new ItemStack(Item.bowlEmpty) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemBowlGelatin), new Object[] { 
-    	new ItemStack(Item.leather), new ItemStack(Item.bowlEmpty) });
+      new ItemStack(Item.leather), new ItemStack(Item.bowlEmpty) });
     ModLoader.AddRecipe(new ItemStack(itemDuctTape, 4), new Object[] { "RRR", "GGG", 
-    	'R', itemRubber, 'G', itemPlasticGoo });
+      'R', itemRubber, 'G', itemPlasticGoo });
     ModLoader.AddRecipe(new ItemStack(itemPlexidoor), new Object[] { "PP", "PP", "PP", 
-    	'P', new ItemStack(blockPlexiglass, 1, 0) });
+      'P', new ItemStack(blockPlexiglass, 1, 0) });
     ModLoader.AddRecipe(new ItemStack(itemBattery), new Object[] { "III", "RBR", "LLL", 
-    	'I', Item.ingotIron, 'R', Item.redstone, 'L', Item.lightStoneDust, 'B', Item.bucketLava });
+      'I', Item.ingotIron, 'R', Item.redstone, 'L', Item.lightStoneDust, 'B', Item.bucketLava });
     ModLoader.AddRecipe(new ItemStack(itemSilicon, 3), new Object[] { " SS", "S S", "SS ", 
-    	'S', Block.sand });
+      'S', Block.sand });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBoat), new Object[] { "P P", "PGP", 
-    	'P', blockPlastic, 'G', new ItemStack(blockPlexiglass, 1, 0) });
+      'P', blockPlastic, 'G', new ItemStack(blockPlexiglass, 1, 0) });
     ModLoader.AddRecipe(new ItemStack(itemC4Defuser), new Object[] { "PBP", "RCG", "IP ", 
-    	'P', itemPlastic, 'R', Item.redstone, 'I', Item.ingotIron, 'C', itemSiliconChip, 'G', Block.glass, 'B', Block.button });
+      'P', itemPlastic, 'R', Item.redstone, 'I', Item.ingotIron, 'C', itemIntegratedCircuit, 'G', Block.glass, 'B', Block.button });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBucket), new Object[] { "P P", " P ", 
-    	'P', itemPlastic });
+      'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBottle), new Object[] { "P  ", " P ", "  P", 
-    	'P', itemPlasticClear });
+      'P', itemPlasticClear });
     ModLoader.AddShapelessRecipe(new ItemStack(itemPlasticBottleM), new Object[] { 
-    	new ItemStack(itemPlasticBucketM), new ItemStack(itemPlasticBottle) });
+      new ItemStack(itemPlasticBucketM), new ItemStack(itemPlasticBottle) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemPlasticBottleM), new Object[] {
       new ItemStack(Item.bucketMilk), new ItemStack(itemPlasticBottle) });
     ModLoader.AddRecipe(new ItemStack(itemNeedle, 3), new Object[] { "P P", "G G", " I ", 
-    	'P', itemPlasticClear, 'G', Block.glass, 'I', Item.ingotIron });
+      'P', itemPlasticClear, 'G', Block.glass, 'I', Item.ingotIron });
     ModLoader.AddRecipe(new ItemStack(itemNeedleHealth), new Object[] { " A ", "RFR", " N ", 
-    	'N', itemNeedle, 'R', Item.redstone, 'F', Block.plantRed, 'A', Item.appleRed });
+      'N', itemNeedle, 'R', Item.redstone, 'F', Block.plantRed, 'A', Item.appleRed });
     ModLoader.AddRecipe(new ItemStack(itemPlastic, 4), new Object[] { "X", 
-    	'X', blockPlastic });
+      'X', blockPlastic });
     ModLoader.AddRecipe(new ItemStack(itemPlasticClear, 4), new Object[] { "X", 
-    	'X', new ItemStack(blockPlexiglass, 1, 0) });
+      'X', new ItemStack(blockPlexiglass, 1, 0) });
     ModLoader.AddRecipe(new ItemStack(itemPlasticGoo, 4), new Object[] { "X", 
-    	'X', blockPlasticGoo });
+      'X', blockPlasticGoo });
     ModLoader.AddRecipe(new ItemStack(itemSynthString, 9), new Object[] { "X", 
-    	'X', blockSynthCloth });
+      'X', blockSynthCloth });
     
     // Other
     ModLoader.AddRecipe(new ItemStack(Item.bow), new Object[] { "S/ ", "S /", "S/ ", 
-    	'/', Item.stick, 'S', itemSynthString });
+      '/', Item.stick, 'S', itemSynthString });
     ModLoader.AddRecipe(new ItemStack(Item.fishingRod), new Object[] { "  /", " /S", "/ S", 
-    	'/', Item.stick, 'S', itemSynthString });
+      '/', Item.stick, 'S', itemSynthString });
     ModLoader.AddRecipe(new ItemStack(Item.feather, 4), new Object[] { "S", "/", 
-    	'/', Item.stick, 'S', blockSynthCloth });
+      '/', Item.stick, 'S', blockSynthCloth });
     ModLoader.AddRecipe(new ItemStack(Item.redstone, 5), new Object[] { "SIS", " S ", "SIS", 
-    	'S', itemSilicon, 'I', Item.ingotIron });
+      'S', itemSilicon, 'I', Item.ingotIron });
     ModLoader.AddRecipe(new ItemStack(Item.redstone, 15), new Object[] { "SIS", " S ", "SIS", 
-    	'S', itemSilicon, 'I', Item.ingotGold });
+      'S', itemSilicon, 'I', Item.ingotGold });
     ModLoader.AddRecipe(new ItemStack(Item.cake), new Object[] { "MMM", "SES", "WWW", 
-    	'M', itemPlasticBucketM, 'S', Item.sugar, 'E', Item.egg, 'W', Item.wheat });
+      'M', itemPlasticBucketM, 'S', Item.sugar, 'E', Item.egg, 'W', Item.wheat });
     ModLoader.AddShapelessRecipe(new ItemStack(Block.pistonStickyBase), new Object[] { 
-    	new ItemStack(Block.pistonBase), new ItemStack(itemPlasticGoo) });
+      new ItemStack(Block.pistonBase), new ItemStack(itemPlasticGoo) });
     
     // Misc
     BlockPlastic.recipes();
@@ -296,9 +294,9 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddSmelting(itemPlastic.shiftedIndex, new ItemStack(itemPlasticGoo));
     ModLoader.AddSmelting(itemBowlGelatin.shiftedIndex, new ItemStack(itemGelatin, 4));
     ModLoader.AddSmelting(itemPlasticBucketL.shiftedIndex, new ItemStack(itemRubber, 2));
-    AddExtractorSmelting(itemMouldFull.shiftedIndex, new ItemStack(itemPlastic, 3), new ItemStack(itemMould));
-    AddExtractorSmelting(itemBowlGelatin.shiftedIndex, new ItemStack(itemGelatin, 4), new ItemStack(Item.bowlEmpty));
-    AddExtractorSmelting(itemPlasticBucketL.shiftedIndex, new ItemStack(itemRubber, 2), new ItemStack(itemPlasticBucket));
+    addExtractorSmelting(itemMouldFull.shiftedIndex, new ItemStack(itemPlastic, 3), new ItemStack(itemMould));
+    addExtractorSmelting(itemBowlGelatin.shiftedIndex, new ItemStack(itemGelatin, 4), new ItemStack(Item.bowlEmpty));
+    addExtractorSmelting(itemPlasticBucketL.shiftedIndex, new ItemStack(itemRubber, 2), new ItemStack(itemPlasticBucket));
     
     // Repair
     for (int i=0; i<class1.size(); i++) {
@@ -335,7 +333,7 @@ public class mod_PlasticCraft extends BaseMod {
       addRepairs(i, items[j]);
   }
   
-  public static void AddExtractorSmelting(int i, ItemStack itemstack, ItemStack itemstack1) {
+  public static void addExtractorSmelting(int i, ItemStack itemstack, ItemStack itemstack1) {
     ExtractRecipes.smelting().addSmelting(i, itemstack);
     ExtractRecipes.smelting().addExtraction(i, itemstack1);
   }
@@ -361,20 +359,20 @@ public class mod_PlasticCraft extends BaseMod {
     Random random = world.rand;
     Entity block = null;
         
-    if(k == blockC4.blockID)
+    if (k == blockC4.blockID)
     	block = new EntityC4Primed(world, d, d1, d2);
-    if(k == Block.tnt.blockID)
+    if (k == Block.tnt.blockID)
     	block = new EntityTNTPrimed(world, d, d1, d2);
-    if(k == blockPlasticGoo.blockID)
+    if (k == blockPlasticGoo.blockID)
     	block = new EntityFallingSand(world, d, d1, d2, blockPlasticGoo.blockID);
-    if(k == Block.sand.blockID)
+    if (k == Block.sand.blockID)
     	block = new EntityFallingSand(world, d, d1, d2, Block.sand.blockID);
-    if(k == Block.gravel.blockID)
+    if (k == Block.gravel.blockID)
     	block = new EntityFallingSand(world, d, d1, d2, Block.gravel.blockID);
-    if(block != null) {
-    	block.posZ = (double)i * (random.nextDouble() * 3D + 2D) + (double)(random.nextFloat() - 0.5F);
-    	block.motionX = 1.0D;
-    	block.motionY = (double)j * (random.nextDouble() * 3D + 2D) + (double)(random.nextFloat() - 0.5F);
+    if (block != null) {
+      block.posZ = (double)i * (random.nextDouble() * 3D + 2D) + (double)(random.nextFloat() - 0.5F);
+      block.motionX = 1.0D;
+      block.motionY = (double)j * (random.nextDouble() * 3D + 2D) + (double)(random.nextFloat() - 0.5F);
       world.entityJoinedWorld((Entity)block);
       world.playSoundEffect(d, d1, d2, "random.bow", 1.0F, 1.2F);
       return true;
@@ -475,8 +473,9 @@ public class mod_PlasticCraft extends BaseMod {
     
     props.getInt("c4Power", 10);
     props.getInt("c4Fuse", 6);
-    props.getBoolean("c4Enhanced", false);
-    props.getString("nightvisionStyle", "Classic");
+    props.getBoolean("c4Enhanced", true);
+    props.getBoolean("toxicFumes", true);
+    props.getString("nightvisionStyle", "SDK");
   }
 
   public static boolean fieldExists(Object obj, String s) {

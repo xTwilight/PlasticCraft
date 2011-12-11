@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
 public class EntityC4Primed extends Entity {
-	public int fuse;
+  public int fuse;
   public int power;
   public int connectedCount;
   public static BlockC4 c4 = (BlockC4)mod_PlasticCraft.blockC4;

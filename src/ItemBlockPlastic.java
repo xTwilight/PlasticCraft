@@ -8,10 +8,6 @@ public class ItemBlockPlastic extends ItemBlock {
     setItemName("pPlasticBlock");
   }
 
-//  public int getIconFromDamage(int i) {
-//    return mod_PlasticCraft.blockPlastic.getBlockTextureFromSideAndMetadata(2, BlockCloth.getBlockFromDye(i));
-//  }
-
   public int getPlacedBlockMetadata(int i) {
     return i;
   }

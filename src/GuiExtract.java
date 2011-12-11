@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
 public class GuiExtract extends GuiContainer {
-	private TileEntityExtract extractorInventory;
+  private TileEntityExtract extractorInventory;
 	
   public GuiExtract(InventoryPlayer inventoryplayer, TileEntityExtract tileentityextract) {
     super(new ContainerExtract(inventoryplayer, tileentityextract));

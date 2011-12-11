@@ -46,8 +46,8 @@ public class BlockTap extends Block_PC {
   public void updateTick(World world, int i, int j, int k, Random random) {
     super.updateTick(world, i, j, k, random);
     
-    if(world.getBlockMetadata(i, j, k) == 0)
-    	getCollisionBoundingBoxFromPool(world, i, j, k);
+    if (world.getBlockMetadata(i, j, k) == 0)
+      getCollisionBoundingBoxFromPool(world, i, j, k);
   }
 
   public void onBlockAdded(World world, int i, int j, int k) {

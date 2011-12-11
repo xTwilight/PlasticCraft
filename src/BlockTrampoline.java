@@ -4,7 +4,7 @@ import java.util.*;
 import net.minecraft.client.Minecraft;
 
 public class BlockTrampoline extends Block_PC {
-	private static double expfac = 1.0800000000000001D;
+  private static double expfac = 1.0800000000000001D;
   private static double initfac = 0.80000000000000004D;
   private static double horizDamp = 0.29999999999999999D;
   private static double bounceCap = 3.25D;

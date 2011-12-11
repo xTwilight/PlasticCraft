@@ -22,8 +22,8 @@ public class ItemConsumable extends ItemFood implements ITextureProvider {
     super.onItemRightClick(itemstack, world, player);
     
     if (itemstack != null && itemstack.itemID == mod_PlasticCraft.itemNeedleHealth.shiftedIndex && player.getEntityHealth() < player.getMaxHealth()) {
-    	player.heal(15);
-    	return new ItemStack(mod_PlasticCraft.itemNeedle);
+      player.heal(15);
+      return new ItemStack(mod_PlasticCraft.itemNeedle);
     }
     
     return itemstack;
@@ -34,6 +34,6 @@ public class ItemConsumable extends ItemFood implements ITextureProvider {
   }
   
   public String getTextureFile() {
-		return mod_PlasticCraft.itemSheet;
-	}
+    return mod_PlasticCraft.itemSheet;
+  }
 }

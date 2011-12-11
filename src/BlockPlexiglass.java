@@ -37,6 +37,6 @@ public class BlockPlexiglass extends BlockBreakable implements ITextureProvider 
   }
   
   public String getTextureFile() {
-		return mod_PlasticCraft.blockSheet;
-	}
+    return mod_PlasticCraft.blockSheet;
+  }
 }

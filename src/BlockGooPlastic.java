@@ -35,8 +35,9 @@ public class BlockGooPlastic extends Block_PC {
   }
 
   public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
-    entity.motionX *= 0.40000000000000002D;
-    entity.motionZ *= 0.40000000000000002D;
+    entity.setInWeb();
+//    entity.motionX *= 0.40000000000000002D;
+//    entity.motionZ *= 0.40000000000000002D;
     freeze(entity);
   }
 

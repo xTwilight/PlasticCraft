@@ -3,10 +3,10 @@ package net.minecraft.src;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockExtract extends BlockContainer implements ITextureProvider {
-	private static int spr[] = new int[2];
-	private static int extractFront = 9;
-	private static int extractTop = 10;
-	private static boolean keepExtractorInventory = false;
+  private static int spr[] = new int[2];
+  private static int extractFront = 9;
+  private static int extractTop = 10;
+  private static boolean keepExtractorInventory = false;
 	
   public BlockExtract(int i) {
     super(i, Material.sponge);
@@ -138,6 +138,6 @@ public class BlockExtract extends BlockContainer implements ITextureProvider {
   }
   
   public String getTextureFile() {
-		return mod_PlasticCraft.blockSheet;
-	}
+    return mod_PlasticCraft.blockSheet;
+  }
 }

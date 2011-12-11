@@ -11,7 +11,7 @@ public class Block_PC extends Block implements ITextureProvider {
   	super(i, j, mat);
   }
 
-	public String getTextureFile() {
-		return mod_PlasticCraft.blockSheet;
-	}
+  public String getTextureFile() {
+    return mod_PlasticCraft.blockSheet;
+  }
 }

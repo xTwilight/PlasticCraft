@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
 public class GuiMicrowave extends GuiContainer {
-	private TileEntityMicrowave microwaveInventory;
+  private TileEntityMicrowave microwaveInventory;
 	
   public GuiMicrowave(InventoryPlayer inventoryplayer, TileEntityMicrowave tileentitymicrowave) {
     super(new ContainerMicrowave(inventoryplayer, tileentitymicrowave));
