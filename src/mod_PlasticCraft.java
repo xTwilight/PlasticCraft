@@ -474,7 +474,6 @@ public class mod_PlasticCraft extends BaseMod {
     props.getInt("c4Power", 10);
     props.getInt("c4Fuse", 6);
     props.getBoolean("c4Enhanced", true);
-    props.getBoolean("toxicFumes", true);
     props.getString("nightvisionStyle", "SDK");
   }
 
