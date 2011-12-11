@@ -19,6 +19,9 @@ public class mod_PlasticCraft extends BaseMod {
   
   public static String itemSheet = modDir + "pc_items.png";
   public static String blockSheet = modDir + "pc_terrain.png";
+  
+  private static EnumArmorMaterial UTILITY = EnumHelper.addArmorMaterial("Utility", 0, new int[] {0, 0, 0, 0}, 5);
+  private static EnumArmorMaterial KEVLAR = EnumHelper.addArmorMaterial("Kevlar", 50, new int[] {2, 6, 5, 2}, 12);
 
   static { prepareProps(); console("Reading /config/PlasticCraft.props"); }
   // Blocks
@@ -87,9 +90,6 @@ public class mod_PlasticCraft extends BaseMod {
   private static ArrayList class4 = new ArrayList(Arrays.asList(new Item[] {
     Item.swordDiamond, Item.shovelDiamond, Item.pickaxeDiamond, Item.axeDiamond, Item.hoeDiamond, Item.helmetDiamond, Item.plateDiamond, Item.legsDiamond, Item.bootsDiamond
   }));
-  
-  private static EnumArmorMaterial UTILITY = EnumHelper.addArmorMaterial("Utility", 0, new int[] {0, 0, 0, 0}, 5);
-  private static EnumArmorMaterial KEVLAR = EnumHelper.addArmorMaterial("Kevlar", 50, new int[] {2, 6, 5, 2}, 12);
   
   public void ModsLoaded() {
     MinecraftForgeClient.preloadTexture(itemSheet); 
