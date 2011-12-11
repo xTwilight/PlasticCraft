@@ -20,7 +20,7 @@ public class mod_PlasticCraft extends BaseMod {
   public static String itemSheet = modDir + "pc_items.png";
   public static String blockSheet = modDir + "pc_terrain.png";
   
-  private static EnumToolMaterial PLASTIC = EnumHelper.addToolMaterial("Plastic", 1, 400, 6F, 1, 5);
+  private static EnumToolMaterial PLASTIC = EnumHelper.addToolMaterial("Plastic", 1, 400, 3F, 0, 5);
   private static EnumArmorMaterial KEVLAR = EnumHelper.addArmorMaterial("Kevlar", 18, new int[] {0, 8, 6, 0}, 12);
   private static EnumArmorMaterial UTILITY = EnumHelper.addArmorMaterial("Utility", 0, new int[] {0, 0, 0, 0}, 5);
 
@@ -71,9 +71,9 @@ public class mod_PlasticCraft extends BaseMod {
   public static Item armorKevlarVest = new ItemArmor_PC(props.getInt("armorKevlarVest") - iOff, mod_PlasticCraft.KEVLAR, ModLoader.AddArmor("Plastic"), 1).setIconIndex(28).setItemName("pKevlarVest");
   public static Item armorKevlarLegs = new ItemArmor_PC(props.getInt("armorKevlarLegs") - iOff, mod_PlasticCraft.KEVLAR, ModLoader.AddArmor("Plastic"), 2).setIconIndex(29).setItemName("pKevlarLegs");
   public static Item armorFallBoots = new ItemArmor_PC(props.getInt("armorFallDampeningBoots") - iOff, mod_PlasticCraft.UTILITY, ModLoader.AddArmor("FallDampener"), 3).setIconIndex(30).setItemName("pFallDampener");
-  public static Item toolPlasticShovel = new ItemPlasticTool(props.getInt("toolPlasticShovel") - iOff, 1, mod_PlasticCraft.PLASTIC).setIconIndex(31).setItemName("pShovel");
-  public static Item toolPlasticPickaxe = new ItemPlasticTool(props.getInt("toolPlasticPickaxe") - iOff, 2, mod_PlasticCraft.PLASTIC).setIconIndex(32).setItemName("pPickaxe");
-  public static Item toolPlasticAxe = new ItemPlasticTool(props.getInt("toolPlasticAxe") - iOff, 3, mod_PlasticCraft.PLASTIC).setIconIndex(33).setItemName("pAxe");
+  public static Item toolPlasticShovel = new ItemPlasticSpade(props.getInt("toolPlasticShovel") - iOff, mod_PlasticCraft.PLASTIC).setIconIndex(31).setItemName("pShovel");
+  public static Item toolPlasticPickaxe = new ItemPlasticPickaxe(props.getInt("toolPlasticPickaxe") - iOff, mod_PlasticCraft.PLASTIC).setIconIndex(32).setItemName("pPickaxe");
+  public static Item toolPlasticAxe = new ItemPlasticAxe(props.getInt("toolPlasticAxe") - iOff, mod_PlasticCraft.PLASTIC).setIconIndex(33).setItemName("pAxe");
   // Booleans
   public static int c4Power = props.getInt("c4Power");
   public static int c4Fuse = props.getInt("c4Fuse") * 20;
