@@ -99,7 +99,7 @@ public class mod_PlasticCraft extends BaseMod {
   
   public void ModsLoaded() {
   	MinecraftForge.versionDetectStrict("PlasticCraft", 1, 2, 1);
-    MinecraftForgeClient.preloadTexture(itemSheet); 
+    MinecraftForgeClient.preloadTexture(itemSheet);
     MinecraftForgeClient.preloadTexture(blockSheet);
   }
   
@@ -124,7 +124,8 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.RegisterEntityID(EntityPlasticCow.class, "Cow", 92);
     ModLoader.AddSpawn(EntityPlasticCow.class, 8, 4, 4, EnumCreatureType.creature);
     
-    addRepairs(2, toolPlasticShovel, toolPlasticPickaxe, toolPlasticAxe, armorKevlarVest, armorKevlarLegs);
+    addRepairs(2, toolPlasticShovel, toolPlasticPickaxe, toolPlasticAxe);
+    addRepairs(3, armorKevlarVest, armorKevlarLegs);
   }
   
   public static void registerItems() {
