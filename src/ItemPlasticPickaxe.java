@@ -1,6 +1,8 @@
 package net.minecraft.src;
 
-public class ItemPlasticPickaxe extends ItemTool {
+import net.minecraft.src.forge.ITextureProvider;
+
+public class ItemPlasticPickaxe extends ItemTool implements ITextureProvider {
   private static Block blocksEffectiveAgainst[] = new Block[] {
     Block.cobblestone, Block.stairDouble, Block.stairSingle, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockSteel, Block.oreCoal, Block.blockGold, 
     Block.oreGold, Block.oreDiamond, Block.blockDiamond, Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.oreRedstone, Block.oreRedstoneGlowing, Block.rail, 
@@ -35,5 +37,9 @@ public class ItemPlasticPickaxe extends ItemTool {
       return efficiencyOnProperMaterial;
     
     return super.getStrVsBlock(itemstack, block);
+  }
+  
+  public String getTextureFile() {
+    return mod_PlasticCraft.itemSheet;
   }
 }
