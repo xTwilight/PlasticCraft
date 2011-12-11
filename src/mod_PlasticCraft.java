@@ -10,7 +10,7 @@ import net.minecraft.src.forge.*;
 import org.lwjgl.opengl.GL11;
 
 public class mod_PlasticCraft extends BaseMod {
-  public String getVersion() { return "v2.2.2 (for 1.0.0)"; }
+  public String getVersion() { return "v2.3 (for 1.0.0)"; }
   public static String modDir = "/TehKrush/PlasticCraft/";
   private static String getAppdata() { return Minecraft.getMinecraftDir().getPath(); }
   private static Props props = new Props((new File((new StringBuilder()).append(getAppdata()).append("/config/").append("mod_PlasticCraft.props").toString())).getPath());
@@ -20,8 +20,9 @@ public class mod_PlasticCraft extends BaseMod {
   public static String itemSheet = modDir + "pc_items.png";
   public static String blockSheet = modDir + "pc_terrain.png";
   
+  private static EnumToolMaterial PLASTIC = EnumHelper.addToolMaterial("Plastic", 1, 400, 6F, 1, 5);
+  private static EnumArmorMaterial KEVLAR = EnumHelper.addArmorMaterial("Kevlar", 18, new int[] {0, 8, 6, 0}, 12);
   private static EnumArmorMaterial UTILITY = EnumHelper.addArmorMaterial("Utility", 0, new int[] {0, 0, 0, 0}, 5);
-  private static EnumArmorMaterial KEVLAR = EnumHelper.addArmorMaterial("Kevlar", 50, new int[] {2, 6, 5, 2}, 12);
 
   static { prepareProps(); console("Reading /config/PlasticCraft.props"); }
   // Blocks
@@ -38,36 +39,41 @@ public class mod_PlasticCraft extends BaseMod {
   public static Block blockAccelerator = new BlockAccelerator(props.getInt("blockAccelerator"));
   public static Block blockExtractor = new BlockExtract(props.getInt("blockExtractor"));
   // Items
-  public static Item itemPlastic = new Item_PC(props.getInt("itemPlasticBall") - iOff).setIconIndex(14).setItemName("pPlasticBall");
-  public static Item itemPlasticClear = new Item_PC(props.getInt("itemClearBall") - iOff).setIconIndex(26).setItemName("pClearBall");
-  public static Item itemPlasticStick = new Item_PC(props.getInt("itemPlasticStick") - iOff).setIconIndex(10).setItemName("pPlasticStick");
-  public static Item itemMould = new Item_PC(props.getInt("itemMould") - iOff).setIconIndex(17).setItemName("pMould");
-  public static Item itemMouldFull = new Item_PC(props.getInt("itemFilledMould") - iOff).setIconIndex(24).setItemName("pFilledMould");
-  public static Item itemWoodDust = new Item_PC(props.getInt("itemWoodFlour") - iOff).setIconIndex(0).setItemName("pWoodFlour");
-  public static Item itemSynthString = new Item_PC(props.getInt("itemPlasticString") - iOff).setIconIndex(9).setItemName("pPlasticString");
-  public static Item itemIntegratedCircuit = new Item_PC(props.getInt("itemSiliconChip") - iOff).setIconIndex(4).setItemName("pSiliconChip");
-  public static Item itemBowlGelatin = new Item_PC(props.getInt("itemGelatinBowl") - iOff).setIconIndex(22).setItemName("pGelatinBowl");
-  public static Item itemGelatin = new Item_PC(props.getInt("itemGelatin") - iOff).setIconIndex(23).setItemName("pGelatin");
-  public static Item itemPlasticGoo = new Item_PC(props.getInt("itemGooPlastic") - iOff).setIconIndex(21).setItemName("pGooPlastic");
-  public static Item itemRubber = new Item_PC(props.getInt("itemRubberBall") - iOff).setIconIndex(6).setItemName("pRubberBall");
-  public static Item itemDuctTape = new Item_PC(props.getInt("itemTape") - iOff).setIconIndex(3).setItemName("pTape");
-  public static Item itemPlexidoor = new ItemPlasticDoor(props.getInt("itemPlexiglassDoor") - iOff).setIconIndex(7).setItemName("pItemPlasticDoor");
-  public static Item itemBattery = new Item_PC(props.getInt("itemBattery") - iOff).setIconIndex(28).setItemName("pBattery");
-  public static Item itemSilicon = new Item_PC(props.getInt("itemSilicon") - iOff).setIconIndex(5).setItemName("pSilicon");
-  public static Item itemPlasticBoat = new ItemPlasticBoat(props.getInt("itemPlasticBoat") - iOff).setIconIndex(13).setItemName("pBoat");
-  public static Item itemC4Defuser = new ItemC4Defuser(props.getInt("itemC4Defuser") - iOff).setIconIndex(27).setItemName("pC4Defuser");
-  public static Item itemPlasticBucket = new ItemPlasticBucket(props.getInt("itemPlasticBucket") - iOff, 0).setIconIndex(12).setItemName("pPlasticBucket");
-  public static Item itemPlasticBucketW = new ItemPlasticBucket(props.getInt("itemPlasticWaterBucket") - iOff, Block.waterMoving.blockID).setIconIndex(1).setItemName("pPlasticWaterBucket").setContainerItem(itemPlasticBucket);
-  public static Item itemPlasticBucketM = new ItemPlasticBucket(props.getInt("itemPlasticMilkBucket") - iOff, -1).setIconIndex(18).setItemName("pPlasticMilkBucket").setContainerItem(itemPlasticBucket);
-  public static Item itemPlasticBucketL = new Item_PC(props.getInt("itemPlasticLatexBucket") - iOff).setIconIndex(20).setItemName("pPlasticLatexBucket");
-  public static Item itemPlasticBottle = new ItemPlasticBucket(props.getInt("itemEmptyBottle") - iOff, 0).setIconIndex(25).setItemName("pEmptyBottle");
-  public static Item itemPlasticBottleW = new ItemConsumable(props.getInt("itemWaterBottle") - iOff, 3, 0.6F, false).setIconIndex(2).setItemName("pWaterBottle");
-  public static Item itemPlasticBottleM = new ItemConsumable(props.getInt("itemMilkBottle") - iOff, 6, 0.6F, true).setIconIndex(19).setItemName("pMilkBottle");
-  public static Item itemNeedle = new Item_PC(props.getInt("itemNeedle") - iOff).setIconIndex(16).setItemName("pNeedle");
-  public static Item itemNeedleHealth = new ItemConsumable(props.getInt("itemRedNeedle") - iOff, 0, 0, true).setIconIndex(15).setItemName("pHealthNeedle");
-  public static Item armorNightGoggles = new ItemArmor_PC(props.getInt("armorNightVisionGoggles") - iOff, mod_PlasticCraft.UTILITY, ModLoader.AddArmor("NVGoggles"), 0).setIconIndex(29).setItemName("pNVGoggles");
-  public static Item armorReinforcedVest = new ItemArmor_PC(props.getInt("armorReinforcedVest") - iOff, mod_PlasticCraft.KEVLAR, ModLoader.AddArmor("Plastic"), 1).setIconIndex(31).setItemName("pReinforcedVest");
+  public static Item itemPlastic = new Item_PC(props.getInt("itemPlasticBall") - iOff).setIconIndex(0).setItemName("pPlasticBall");
+  public static Item itemPlasticClear = new Item_PC(props.getInt("itemClearBall") - iOff).setIconIndex(1).setItemName("pClearBall");
+  public static Item itemPlasticStick = new Item_PC(props.getInt("itemPlasticStick") - iOff).setIconIndex(2).setItemName("pPlasticStick");
+  public static Item itemMould = new Item_PC(props.getInt("itemMould") - iOff).setIconIndex(3).setItemName("pMould");
+  public static Item itemMouldFull = new Item_PC(props.getInt("itemFilledMould") - iOff).setIconIndex(4).setItemName("pFilledMould");
+  public static Item itemWoodDust = new Item_PC(props.getInt("itemWoodFlour") - iOff).setIconIndex(5).setItemName("pWoodFlour");
+  public static Item itemSynthString = new Item_PC(props.getInt("itemPlasticString") - iOff).setIconIndex(6).setItemName("pPlasticString");
+  public static Item itemIntegratedCircuit = new Item_PC(props.getInt("itemSiliconChip") - iOff).setIconIndex(7).setItemName("pSiliconChip");
+  public static Item itemBowlGelatin = new Item_PC(props.getInt("itemGelatinBowl") - iOff).setIconIndex(8).setItemName("pGelatinBowl");
+  public static Item itemGelatin = new Item_PC(props.getInt("itemGelatin") - iOff).setIconIndex(9).setItemName("pGelatin");
+  public static Item itemPlasticGoo = new Item_PC(props.getInt("itemGooPlastic") - iOff).setIconIndex(10).setItemName("pGooPlastic");
+  public static Item itemRubber = new Item_PC(props.getInt("itemRubberBall") - iOff).setIconIndex(11).setItemName("pRubberBall");
+  public static Item itemDuctTape = new Item_PC(props.getInt("itemTape") - iOff).setIconIndex(12).setItemName("pTape");
+  public static Item itemPlexidoor = new ItemPlasticDoor(props.getInt("itemPlexiglassDoor") - iOff).setIconIndex(13).setItemName("pItemPlasticDoor");
+  public static Item itemBattery = new Item_PC(props.getInt("itemBattery") - iOff).setIconIndex(14).setItemName("pBattery");
+  public static Item itemSilicon = new Item_PC(props.getInt("itemSilicon") - iOff).setIconIndex(15).setItemName("pSilicon");
+  public static Item itemPlasticBoat = new ItemPlasticBoat(props.getInt("itemPlasticBoat") - iOff).setIconIndex(16).setItemName("pBoat");
+  public static Item itemC4Defuser = new ItemC4Defuser(props.getInt("itemC4Defuser") - iOff).setIconIndex(17).setItemName("pC4Defuser");
+  public static Item itemPlasticBucket = new ItemPlasticBucket(props.getInt("itemPlasticBucket") - iOff, 0).setIconIndex(18).setItemName("pPlasticBucket");
+  public static Item itemPlasticBucketW = new ItemPlasticBucket(props.getInt("itemPlasticWaterBucket") - iOff, Block.waterMoving.blockID).setIconIndex(19).setItemName("pPlasticWaterBucket").setContainerItem(itemPlasticBucket);
+  public static Item itemPlasticBucketM = new ItemPlasticBucket(props.getInt("itemPlasticMilkBucket") - iOff, -1).setIconIndex(20).setItemName("pPlasticMilkBucket").setContainerItem(itemPlasticBucket);
+  public static Item itemPlasticBucketL = new Item_PC(props.getInt("itemPlasticLatexBucket") - iOff).setIconIndex(21).setItemName("pPlasticLatexBucket");
+  public static Item itemPlasticBottle = new ItemPlasticBucket(props.getInt("itemEmptyBottle") - iOff, 0).setIconIndex(22).setItemName("pEmptyBottle");
+  public static Item itemPlasticBottleW = new ItemConsumable(props.getInt("itemWaterBottle") - iOff, 3, 0.6F, false).setIconIndex(23).setItemName("pWaterBottle");
+  public static Item itemPlasticBottleM = new ItemConsumable(props.getInt("itemMilkBottle") - iOff, 6, 0.6F, true).setIconIndex(24).setItemName("pMilkBottle");
+  public static Item itemNeedle = new Item_PC(props.getInt("itemNeedle") - iOff).setIconIndex(25).setItemName("pNeedle");
+  public static Item itemNeedleHealth = new ItemConsumable(props.getInt("itemRedNeedle") - iOff, 0, 0, true).setIconIndex(26).setItemName("pHealthNeedle");
+  // Tools and Armor
+  public static Item armorNightGoggles = new ItemArmor_PC(props.getInt("armorNightVisionGoggles") - iOff, mod_PlasticCraft.UTILITY, ModLoader.AddArmor("NVGoggles"), 0).setIconIndex(27).setItemName("pNVGoggles");
+  public static Item armorKevlarVest = new ItemArmor_PC(props.getInt("armorKevlarVest") - iOff, mod_PlasticCraft.KEVLAR, ModLoader.AddArmor("Plastic"), 1).setIconIndex(28).setItemName("pKevlarVest");
+  public static Item armorKevlarLegs = new ItemArmor_PC(props.getInt("armorKevlarLegs") - iOff, mod_PlasticCraft.KEVLAR, ModLoader.AddArmor("Plastic"), 2).setIconIndex(29).setItemName("pKevlarLegs");
   public static Item armorFallBoots = new ItemArmor_PC(props.getInt("armorFallDampeningBoots") - iOff, mod_PlasticCraft.UTILITY, ModLoader.AddArmor("FallDampener"), 3).setIconIndex(30).setItemName("pFallDampener");
+  public static Item toolPlasticShovel = new ItemPlasticTool(props.getInt("toolPlasticShovel") - iOff, 1, mod_PlasticCraft.PLASTIC).setIconIndex(31).setItemName("pShovel");
+  public static Item toolPlasticPickaxe = new ItemPlasticTool(props.getInt("toolPlasticPickaxe") - iOff, 2, mod_PlasticCraft.PLASTIC).setIconIndex(32).setItemName("pPickaxe");
+  public static Item toolPlasticAxe = new ItemPlasticTool(props.getInt("toolPlasticAxe") - iOff, 3, mod_PlasticCraft.PLASTIC).setIconIndex(33).setItemName("pAxe");
   // Booleans
   public static int c4Power = props.getInt("c4Power");
   public static int c4Fuse = props.getInt("c4Fuse") * 20;
@@ -92,6 +98,7 @@ public class mod_PlasticCraft extends BaseMod {
   }));
   
   public void ModsLoaded() {
+  	MinecraftForge.versionDetectStrict("PlasticCraft", 1, 2, 1);
     MinecraftForgeClient.preloadTexture(itemSheet); 
     MinecraftForgeClient.preloadTexture(blockSheet);
   }
@@ -101,6 +108,10 @@ public class mod_PlasticCraft extends BaseMod {
     console("Registering items.");
     addRecipes();
     console("Registering recipes.");
+    
+    MinecraftForge.setToolClass(toolPlasticShovel, "shovel", 1);
+    MinecraftForge.setToolClass(toolPlasticPickaxe, "pickaxe", 1);
+    MinecraftForge.setToolClass(toolPlasticAxe, "axe", 1);
   	
     ModLoader.SetInGameHook(this, true, false);
     
@@ -112,6 +123,8 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.RemoveSpawn("Cow", EnumCreatureType.creature);
     ModLoader.RegisterEntityID(EntityPlasticCow.class, "Cow", 92);
     ModLoader.AddSpawn(EntityPlasticCow.class, 8, 4, 4, EnumCreatureType.creature);
+    
+    addRepairs(2, toolPlasticShovel, toolPlasticPickaxe, toolPlasticAxe, armorKevlarVest, armorKevlarLegs);
   }
   
   public static void registerItems() {
@@ -182,8 +195,12 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(itemNeedle, "Needle");
     ModLoader.AddName(itemNeedleHealth, "Health Needle");
     ModLoader.AddName(armorNightGoggles, "Night-Vision Goggles");
-    ModLoader.AddName(armorReinforcedVest, "Reinforced Vest");
+    ModLoader.AddName(armorKevlarVest, "Kevlar Vest");
+    ModLoader.AddName(armorKevlarLegs, "Kevlar Vest");
     ModLoader.AddName(armorFallBoots, "Shock-Absorbing Boots");
+    ModLoader.AddName(toolPlasticShovel, "Plastic Shovel");
+    ModLoader.AddName(toolPlasticPickaxe, "Plastic Pickaxe");
+    ModLoader.AddName(toolPlasticAxe, "Plastic Axe");
   }
 
   public static void addRecipes() {
@@ -212,12 +229,14 @@ public class mod_PlasticCraft extends BaseMod {
       'P', blockPlastic, 'F', Block.stoneOvenIdle, 'E', blockTap, 'X', itemIntegratedCircuit });
     
     // Items
-    ModLoader.AddRecipe(new ItemStack(armorNightGoggles), new Object[] { "SSS", "S S", "PCP", 
-      'S', itemSynthString, 'P', Item.diamond, 'C', itemIntegratedCircuit });
-    ModLoader.AddRecipe(new ItemStack(armorReinforcedVest), new Object[] { "S S", "/I/", "SPS", 
-      'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.plateSteel });
-    ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { " PP", " PC", "OOO", 
-      'P', blockPlastic, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
+    ModLoader.AddRecipe(new ItemStack(itemPlastic, 4), new Object[] { "X", 
+      'X', blockPlastic });
+    ModLoader.AddRecipe(new ItemStack(itemPlasticClear, 4), new Object[] { "X", 
+      'X', new ItemStack(blockPlexiglass, 1, 0) });
+    ModLoader.AddRecipe(new ItemStack(itemPlasticGoo, 4), new Object[] { "X", 
+      'X', blockPlasticGoo });
+    ModLoader.AddRecipe(new ItemStack(itemSynthString, 9), new Object[] { "X", 
+      'X', blockSynthCloth });
     ModLoader.AddRecipe(new ItemStack(itemPlasticStick, 4), new Object[] { "P", "P", 
       'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(itemSynthString, 4), new Object[] { "PP", 
@@ -234,8 +253,6 @@ public class mod_PlasticCraft extends BaseMod {
       new ItemStack(itemWoodDust), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(itemMould) });
     ModLoader.AddRecipe(new ItemStack(itemWoodDust, 4), new Object[] { "W", 
       'W', Block.planks });
-    ModLoader.AddRecipe(new ItemStack(itemIntegratedCircuit, 2), new Object[] { "SFS", "IRI", "PPP", 
-      'F', blockSynthCloth, 'I', Item.ingotIron, 'R', Item.redstoneRepeater, 'P', blockPlastic, 'S', itemSilicon });
     ModLoader.AddShapelessRecipe(new ItemStack(itemBowlGelatin), new Object[] { 
       new ItemStack(Item.beefRaw), new ItemStack(Item.bowlEmpty) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemBowlGelatin), new Object[] { 
@@ -252,6 +269,8 @@ public class mod_PlasticCraft extends BaseMod {
       'I', Item.ingotIron, 'R', Item.redstone, 'L', Item.lightStoneDust, 'B', Item.bucketLava });
     ModLoader.AddRecipe(new ItemStack(itemSilicon, 3), new Object[] { " SS", "S S", "SS ", 
       'S', Block.sand });
+    ModLoader.AddRecipe(new ItemStack(itemIntegratedCircuit, 2), new Object[] { "SFS", "IRI", "PPP", 
+      'F', blockSynthCloth, 'I', Item.ingotIron, 'R', Item.redstoneRepeater, 'P', blockPlastic, 'S', itemSilicon });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBoat), new Object[] { "P P", "PGP", 
       'P', blockPlastic, 'G', new ItemStack(blockPlexiglass, 1, 0) });
     ModLoader.AddRecipe(new ItemStack(itemC4Defuser), new Object[] { "PBP", "RCG", "IP ", 
@@ -268,14 +287,22 @@ public class mod_PlasticCraft extends BaseMod {
       'P', itemPlasticClear, 'G', Block.glass, 'I', Item.ingotIron });
     ModLoader.AddRecipe(new ItemStack(itemNeedleHealth), new Object[] { " A ", "RFR", " N ", 
       'N', itemNeedle, 'R', Item.redstone, 'F', Block.plantRed, 'A', Item.appleRed });
-    ModLoader.AddRecipe(new ItemStack(itemPlastic, 4), new Object[] { "X", 
-      'X', blockPlastic });
-    ModLoader.AddRecipe(new ItemStack(itemPlasticClear, 4), new Object[] { "X", 
-      'X', new ItemStack(blockPlexiglass, 1, 0) });
-    ModLoader.AddRecipe(new ItemStack(itemPlasticGoo, 4), new Object[] { "X", 
-      'X', blockPlasticGoo });
-    ModLoader.AddRecipe(new ItemStack(itemSynthString, 9), new Object[] { "X", 
-      'X', blockSynthCloth });
+    
+    // Tools and Armor
+    ModLoader.AddRecipe(new ItemStack(armorNightGoggles), new Object[] { "SSS", "S S", "PCP", 
+      'S', itemSynthString, 'P', Item.diamond, 'C', itemIntegratedCircuit });
+    ModLoader.AddRecipe(new ItemStack(armorKevlarVest), new Object[] { "S S", "/I/", "SPS", 
+      'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.plateLeather });
+    ModLoader.AddRecipe(new ItemStack(armorKevlarLegs), new Object[] { "S S", "/I/", "SPS", 
+      'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.legsLeather });
+    ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { " PP", " PC", "OOO", 
+      'P', blockPlastic, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
+    ModLoader.AddRecipe(new ItemStack(toolPlasticShovel), new Object[] { " P ", " / ", " / ", 
+      'P', itemPlastic, '/', itemPlasticStick });
+    ModLoader.AddRecipe(new ItemStack(toolPlasticPickaxe), new Object[] { "PPP", " / ", " / ", 
+    	'P', itemPlastic, '/', itemPlasticStick });
+    ModLoader.AddRecipe(new ItemStack(toolPlasticAxe), new Object[] { "PP ", "P/ ", " / ", 
+    	'P', itemPlastic, '/', itemPlasticStick });
     
     // Other
     ModLoader.AddRecipe(new ItemStack(Item.bow), new Object[] { "S/ ", "S /", "S/ ", 
@@ -458,26 +485,31 @@ public class mod_PlasticCraft extends BaseMod {
     props.getInt("itemSiliconChip", 1008);
     props.getInt("itemGelatinBowl", 1009);
     props.getInt("itemGelatin", 1010);
-    props.getInt("armorNightVisionGoggles", 1012);
-    props.getInt("armorReinforcedVest", 1030);
-    props.getInt("armorFallDampeningBoots", 1011);
-    props.getInt("itemGooPlastic", 1013);
-    props.getInt("itemRubberBall", 1014);
-    props.getInt("itemTape", 1015);
-    props.getInt("itemPlexiglassDoor", 1016);
-    props.getInt("itemBattery", 1017);
-    props.getInt("itemSilicon", 1018);
-    props.getInt("itemPlasticBoat", 1019);
-    props.getInt("itemC4Defuser", 1020);
-    props.getInt("itemPlasticBucket", 1021);
-    props.getInt("itemPlasticWaterBucket", 1022);
-    props.getInt("itemPlasticMilkBucket", 1023);
-    props.getInt("itemPlasticLatexBucket", 1024);
-    props.getInt("itemEmptyBottle", 1025);
-    props.getInt("itemWaterBottle", 1026);
-    props.getInt("itemMilkBottle", 1027);
-    props.getInt("itemNeedle", 1028);
-    props.getInt("itemRedNeedle", 1029);
+    props.getInt("itemGooPlastic", 1011);
+    props.getInt("itemRubberBall", 1012);
+    props.getInt("itemTape", 1013);
+    props.getInt("itemPlexiglassDoor", 1014);
+    props.getInt("itemBattery", 1015);
+    props.getInt("itemSilicon", 1016);
+    props.getInt("itemPlasticBoat", 1017);
+    props.getInt("itemC4Defuser", 1018);
+    props.getInt("itemPlasticBucket", 1019);
+    props.getInt("itemPlasticWaterBucket", 1020);
+    props.getInt("itemPlasticMilkBucket", 1021);
+    props.getInt("itemPlasticLatexBucket", 1022);
+    props.getInt("itemEmptyBottle", 1023);
+    props.getInt("itemWaterBottle", 1024);
+    props.getInt("itemMilkBottle", 1025);
+    props.getInt("itemNeedle", 1026);
+    props.getInt("itemRedNeedle", 1027);
+    
+    props.getInt("armorNightVisionGoggles", 1040);
+    props.getInt("armorKevlarVest", 1041);
+    props.getInt("armorKevlarLegs", 1042);
+    props.getInt("armorFallDampeningBoots", 1043);
+    props.getInt("toolPlasticShovel", 1050);
+    props.getInt("toolPlasticPickaxe", 1051);
+    props.getInt("toolPlasticAxe", 1052);
     
     props.getInt("c4Power", 10);
     props.getInt("c4Fuse", 6);
