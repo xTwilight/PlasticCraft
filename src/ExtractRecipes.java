@@ -11,20 +11,31 @@ public class ExtractRecipes {
   private ExtractRecipes() {
     smeltingList = new HashMap();
     extractionList = new HashMap();
+    addSmelting(Block.oreCoal.blockID, new ItemStack(Item.coal));
     addSmelting(Block.oreIron.blockID, new ItemStack(Item.ingotIron));
-    addExtraction(Block.oreIron.blockID, new ItemStack(Block.stone));
     addSmelting(Block.oreGold.blockID, new ItemStack(Item.ingotGold));
-    addExtraction(Block.oreGold.blockID, new ItemStack(Block.stone));
     addSmelting(Block.oreDiamond.blockID, new ItemStack(Item.diamond));
-    addExtraction(Block.oreDiamond.blockID, new ItemStack(Block.stone));
+    addSmelting(Block.oreRedstone.blockID, new ItemStack(Item.redstone));
+    addSmelting(Block.oreLapis.blockID, new ItemStack(Item.dyePowder, 1, 4));
     addSmelting(Block.sand.blockID, new ItemStack(Block.glass));
     addSmelting(Item.porkRaw.shiftedIndex, new ItemStack(Item.porkCooked));
-    addExtraction(Item.porkRaw.shiftedIndex, new ItemStack(mod_PlasticCraft.itemGelatin, 3));
+    addSmelting(Item.beefRaw.shiftedIndex, new ItemStack(Item.beefCooked));
+    addSmelting(Item.chickenRaw.shiftedIndex, new ItemStack(Item.chickenCooked));
     addSmelting(Item.fishRaw.shiftedIndex, new ItemStack(Item.fishCooked));
     addSmelting(Block.cobblestone.blockID, new ItemStack(Block.stone));
     addSmelting(Item.clay.shiftedIndex, new ItemStack(Item.brick));
     addSmelting(Block.cactus.blockID, new ItemStack(Item.dyePowder, 1, 2));
     addSmelting(Block.wood.blockID, new ItemStack(Item.coal, 1, 1));
+    
+    addExtraction(Block.oreCoal.blockID, new ItemStack(Block.stone));
+    addExtraction(Block.oreIron.blockID, new ItemStack(Block.stone));
+    addExtraction(Block.oreGold.blockID, new ItemStack(Block.stone));
+    addExtraction(Block.oreDiamond.blockID, new ItemStack(Block.stone));
+    addExtraction(Block.oreRedstone.blockID, new ItemStack(Block.stone));
+    addExtraction(Block.oreLapis.blockID, new ItemStack(Block.stone));
+    addExtraction(Item.porkRaw.shiftedIndex, new ItemStack(mod_PlasticCraft.itemGelatin, 2));
+    addExtraction(Item.beefRaw.shiftedIndex, new ItemStack(mod_PlasticCraft.itemGelatin, 2));
+    addExtraction(Item.chickenRaw.shiftedIndex, new ItemStack(mod_PlasticCraft.itemGelatin, 2));
     addExtraction(Block.wood.blockID, new ItemStack(mod_PlasticCraft.itemWoodDust, 3));
   }
 

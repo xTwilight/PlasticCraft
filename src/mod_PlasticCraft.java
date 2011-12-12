@@ -331,6 +331,7 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddSmelting(itemBowlGelatin.shiftedIndex, new ItemStack(itemGelatin, 4));
     ModLoader.AddSmelting(itemPlasticBucketL.shiftedIndex, new ItemStack(itemRubber, 2));
     addExtractorSmelting(itemMouldFull.shiftedIndex, new ItemStack(itemPlastic, 3), new ItemStack(itemMould));
+    addExtractorSmelting(itemPlastic.shiftedIndex, new ItemStack(itemPlasticGoo));
     addExtractorSmelting(itemBowlGelatin.shiftedIndex, new ItemStack(itemGelatin, 4), new ItemStack(Item.bowlEmpty));
     addExtractorSmelting(itemPlasticBucketL.shiftedIndex, new ItemStack(itemRubber, 2), new ItemStack(itemPlasticBucket));
     
@@ -369,8 +370,12 @@ public class mod_PlasticCraft extends BaseMod {
     ExtractRecipes.smelting().addExtraction(i, itemstack1);
   }
   
+  public static void addExtractorSmelting(int i, ItemStack itemstack) {
+    ExtractRecipes.smelting().addSmelting(i, itemstack);
+  }
+  
   public boolean OnTickInGame(float f, Minecraft minecraft) {
-    if(minecraft.currentScreen == null) {
+    if (minecraft.currentScreen == null) {
       renderNightvisionOverlay(minecraft);
     }
 
@@ -382,6 +387,10 @@ public class mod_PlasticCraft extends BaseMod {
   public void AddRenderer(Map map) {
     map.put(net.minecraft.src.EntityC4Primed.class, new RenderC4Primed());
     map.put(net.minecraft.src.EntityPlasticBoat.class, new RenderPlasticBoat());
+  }
+  
+  public void RegisterAnimation(Minecraft minecraft) {
+    ModLoader.addAnimation(new TextureFrameAnimFX(BlockMicrowave.microwaveAnim, modDir + "blockMicrowaveAnim.png"));
   }
 
   public boolean DispenseEntity(World world, double d, double d1, double d2, int i, int j, ItemStack itemstack) {
@@ -407,12 +416,8 @@ public class mod_PlasticCraft extends BaseMod {
       world.entityJoinedWorld((Entity)block);
       world.playSoundEffect(d, d1, d2, "random.bow", 1.0F, 1.2F);
       return true;
-    } else 
+    } else
     return false;
-  }
-  
-  public void RegisterAnimation(Minecraft minecraft) {
-    ModLoader.addAnimation(new TextureFrameAnimFX(BlockMicrowave.microwaveAnim, modDir + "blockMicrowaveAnim.png"));
   }
 
   private void enableShockAbsorbing(Minecraft minecraft) {
