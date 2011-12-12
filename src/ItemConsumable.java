@@ -2,22 +2,22 @@ package net.minecraft.src;
 
 import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemConsumable extends ItemFood implements ITextureProvider {
-  boolean isFood;
-	
-  public ItemConsumable(int i, int j, float k, boolean flag, boolean food) {
+public class ItemConsumable extends ItemFood_PC {
+  public ItemConsumable(int i, int j, float k, boolean flag) {
     super(i, j, k, flag);
     maxStackSize = 1;
-    isFood = food;
   }
-
-  public ItemStack onFoodEaten(ItemStack itemstack, World world, EntityPlayer player, int i) {
+  
+  public ItemStack onFoodEaten(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    entityplayer.getFoodStats().addStatsFrom(this);
+    world.playSoundAtEntity(entityplayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+    
     if (itemstack != null && itemstack.itemID == mod_PlasticCraft.itemPlasticBottleW.shiftedIndex)
       return new ItemStack(mod_PlasticCraft.itemPlasticBottle);
     if (itemstack != null && itemstack.itemID == mod_PlasticCraft.itemPlasticBottleM.shiftedIndex)
       return new ItemStack(mod_PlasticCraft.itemPlasticBottle);
     
-    return super.onFoodEaten(itemstack, world, player);
+    return itemstack;
   }
   
   public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
@@ -30,13 +30,6 @@ public class ItemConsumable extends ItemFood implements ITextureProvider {
   }
   
   public EnumAction getItemUseAction(ItemStack itemstack) {
-  	if (!isFood)
-      return EnumAction.drink;
-  	
-  	return EnumAction.eat;
-  }
-  
-  public String getTextureFile() {
-    return mod_PlasticCraft.itemSheet;
+    return EnumAction.drink;
   }
 }
