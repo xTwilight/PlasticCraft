@@ -19,6 +19,11 @@ public class BlockPlexiglass extends BlockBreakable implements ITextureProvider 
   	if (meta == 1) return 15;
   	else return 0;
   }
+  
+  public int getBlockTextureFromSideAndMetadata(int side, int meta) {
+  	if (meta == 1) return 17;
+  	return 2;
+  }
 
   public int getRenderBlockPass() {
     return 1;

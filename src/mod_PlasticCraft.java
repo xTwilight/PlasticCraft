@@ -212,7 +212,7 @@ public class mod_PlasticCraft extends BaseMod {
       'P', itemPlasticGoo });
     ModLoader.AddRecipe(new ItemStack(blockC4), new Object[] { "GPG", "PCP", "GPG", 
       'P', blockPlastic, 'G', Item.gunpowder, 'C', itemIntegratedCircuit });
-    ModLoader.AddRecipe(new ItemStack(blockSynthCloth), new Object[] { "SSS", "SSS", "SSS", 
+    ModLoader.AddRecipe(new ItemStack(blockSynthCloth), new Object[] { "SS", "SS", 
       'S', itemSynthString });
     ModLoader.AddRecipe(new ItemStack(blockPlexiglass, 1, 0), new Object[] { "PP", "PP", 
       'P', itemPlasticClear });
@@ -236,7 +236,7 @@ public class mod_PlasticCraft extends BaseMod {
       'X', new ItemStack(blockPlexiglass, 1, 0) });
     ModLoader.AddRecipe(new ItemStack(itemPlasticGoo, 4), new Object[] { "X", 
       'X', blockPlasticGoo });
-    ModLoader.AddRecipe(new ItemStack(itemSynthString, 9), new Object[] { "X", 
+    ModLoader.AddRecipe(new ItemStack(itemSynthString, 4), new Object[] { "X", 
       'X', blockSynthCloth });
     ModLoader.AddRecipe(new ItemStack(itemPlasticStick, 4), new Object[] { "P", "P", 
       'P', itemPlastic });
@@ -274,8 +274,8 @@ public class mod_PlasticCraft extends BaseMod {
       'F', blockSynthCloth, 'I', Item.ingotIron, 'R', Item.redstoneRepeater, 'P', blockPlastic, 'S', itemSilicon });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBoat), new Object[] { "P P", "PGP", 
       'P', blockPlastic, 'G', new ItemStack(blockPlexiglass, 1, 0) });
-    ModLoader.AddRecipe(new ItemStack(itemC4Defuser), new Object[] { "PBP", "RCG", "IP ", 
-      'P', itemPlastic, 'R', Item.redstone, 'I', Item.ingotIron, 'C', itemIntegratedCircuit, 'G', Block.glass, 'B', Block.button });
+    ModLoader.AddRecipe(new ItemStack(itemC4Defuser), new Object[] { "PBP", "RCG", "IS ", 
+      'P', itemPlastic, 'R', Item.redstone, 'I', Item.ingotIron, 'C', itemIntegratedCircuit, 'G', Block.glass, 'B', Block.button, 'S', itemBattery });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBucket), new Object[] { "P P", " P ", 
       'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBottle), new Object[] { "P  ", " P ", "  P", 
@@ -284,10 +284,14 @@ public class mod_PlasticCraft extends BaseMod {
       new ItemStack(itemPlasticBucketM), new ItemStack(itemPlasticBottle) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemPlasticBottleM), new Object[] {
       new ItemStack(Item.bucketMilk), new ItemStack(itemPlasticBottle) });
-    ModLoader.AddRecipe(new ItemStack(itemNeedle, 3), new Object[] { "P P", "G G", " I ", 
+    ModLoader.AddShapelessRecipe(new ItemStack(itemPlasticBottleW), new Object[] { 
+      new ItemStack(itemPlasticBucketW), new ItemStack(itemPlasticBottle) });
+    ModLoader.AddShapelessRecipe(new ItemStack(itemPlasticBottleW), new Object[] { 
+      new ItemStack(Item.bucketMilk), new ItemStack(itemPlasticBottle) });
+    ModLoader.AddRecipe(new ItemStack(itemNeedle, 2), new Object[] { "P P", "G G", " I ", 
       'P', itemPlasticClear, 'G', Block.glass, 'I', Item.ingotIron });
     ModLoader.AddRecipe(new ItemStack(itemNeedleHealth), new Object[] { " A ", "RFR", " N ", 
-      'N', itemNeedle, 'R', Item.redstone, 'F', Block.plantRed, 'A', Item.appleRed });
+      'N', itemNeedle, 'R', Item.redstone, 'F', Block.plantRed, 'A', Item.speckledMelon });
     
     // Tools and Armor
     ModLoader.AddRecipe(new ItemStack(armorNightGoggles), new Object[] { "SSS", "S S", "PCP", 
@@ -296,8 +300,8 @@ public class mod_PlasticCraft extends BaseMod {
       'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.plateLeather });
     ModLoader.AddRecipe(new ItemStack(armorKevlarLegs), new Object[] { "S S", "/I/", "SPS", 
       'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.legsLeather });
-    ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { " PP", " PC", "OOO", 
-      'P', blockPlastic, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
+    ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { "O O", " C ", "R R", 
+      'R', itemRubber, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(toolPlasticShovel), new Object[] { " P ", " / ", " / ", 
       'P', itemPlastic, '/', itemPlasticStick });
     ModLoader.AddRecipe(new ItemStack(toolPlasticPickaxe), new Object[] { "PPP", " / ", " / ", 
