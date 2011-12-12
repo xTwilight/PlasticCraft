@@ -296,10 +296,10 @@ public class mod_PlasticCraft extends BaseMod {
     // Tools and Armor
     ModLoader.AddRecipe(new ItemStack(armorNightGoggles), new Object[] { "SSS", "S S", "PCP", 
       'S', itemSynthString, 'P', Item.diamond, 'C', itemIntegratedCircuit });
-    ModLoader.AddRecipe(new ItemStack(armorKevlarVest), new Object[] { "S S", "/I/", "SPS", 
-      'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.plateLeather });
-    ModLoader.AddRecipe(new ItemStack(armorKevlarLegs), new Object[] { "S S", "/I/", "SPS", 
-      'S', blockSynthCloth, 'P', blockPlastic, '/', itemSynthString, 'I', Item.legsLeather });
+    ModLoader.AddRecipe(new ItemStack(armorKevlarVest), new Object[] { "SSS", "/I/", "SSS", 
+      'S', blockSynthCloth, '/', itemSynthString, 'I', Item.plateLeather });
+    ModLoader.AddRecipe(new ItemStack(armorKevlarLegs), new Object[] { "SSS", "/I/", "SSS", 
+      'S', blockSynthCloth, '/', itemSynthString, 'I', Item.legsLeather });
     ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { "O O", " C ", "R R", 
       'R', itemRubber, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(toolPlasticShovel), new Object[] { " P ", " / ", " / ", 
