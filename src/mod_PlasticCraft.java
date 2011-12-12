@@ -88,10 +88,10 @@ public class mod_PlasticCraft extends BaseMod {
     Item.hoeGold, Item.helmetLeather, Item.plateLeather, Item.legsLeather, Item.bootsLeather, Item.helmetGold, Item.plateGold, Item.legsGold, Item.bootsGold
   }));
   private static ArrayList class2 = new ArrayList(Arrays.asList(new Item[] {
-    Item.swordStone, Item.shovelStone, Item.pickaxeStone, Item.axeStone, Item.hoeStone, Item.helmetChain, Item.plateChain, Item.legsChain, Item.bootsChain
+    Item.swordStone, Item.shovelStone, Item.pickaxeStone, Item.axeStone, Item.hoeStone, Item.helmetChain, Item.plateChain, Item.legsChain, Item.bootsChain, toolPlasticShovel, toolPlasticPickaxe, toolPlasticAxe
   }));
   private static ArrayList class3 = new ArrayList(Arrays.asList(new Item[] {
-    Item.flintAndSteel, Item.shovelSteel, Item.pickaxeSteel, Item.axeSteel, Item.swordSteel, Item.hoeSteel, Item.helmetSteel, Item.plateSteel, Item.legsSteel, Item.bootsSteel
+    Item.flintAndSteel, Item.shovelSteel, Item.pickaxeSteel, Item.axeSteel, Item.swordSteel, Item.hoeSteel, Item.helmetSteel, Item.plateSteel, Item.legsSteel, Item.bootsSteel, armorKevlarVest, armorKevlarLegs
   }));
   private static ArrayList class4 = new ArrayList(Arrays.asList(new Item[] {
     Item.swordDiamond, Item.shovelDiamond, Item.pickaxeDiamond, Item.axeDiamond, Item.hoeDiamond, Item.helmetDiamond, Item.plateDiamond, Item.legsDiamond, Item.bootsDiamond
@@ -123,9 +123,6 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.RemoveSpawn("Cow", EnumCreatureType.creature);
     ModLoader.RegisterEntityID(EntityPlasticCow.class, "Cow", 92);
     ModLoader.AddSpawn(EntityPlasticCow.class, 8, 4, 4, EnumCreatureType.creature);
-    
-    addRepairs(2, toolPlasticShovel, toolPlasticPickaxe, toolPlasticAxe);
-    addRepairs(3, armorKevlarVest, armorKevlarLegs);
   }
   
   public static void registerItems() {
@@ -197,7 +194,7 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(itemNeedleHealth, "Health Needle");
     ModLoader.AddName(armorNightGoggles, "Night-Vision Goggles");
     ModLoader.AddName(armorKevlarVest, "Kevlar Vest");
-    ModLoader.AddName(armorKevlarLegs, "Kevlar Vest");
+    ModLoader.AddName(armorKevlarLegs, "Kevlar Pants");
     ModLoader.AddName(armorFallBoots, "Shock-Absorbing Boots");
     ModLoader.AddName(toolPlasticShovel, "Plastic Shovel");
     ModLoader.AddName(toolPlasticPickaxe, "Plastic Pickaxe");
@@ -365,11 +362,6 @@ public class mod_PlasticCraft extends BaseMod {
     if (i == 2) class2.add(item);
     if (i == 3) class3.add(item);
     if (i == 4) class4.add(item);
-  }
-
-  public static void addRepairs(int i, Item... items) {
-    for (int j=0; j<items.length; j++)
-      addRepairs(i, items[j]);
   }
   
   public static void addExtractorSmelting(int i, ItemStack itemstack, ItemStack itemstack1) {
