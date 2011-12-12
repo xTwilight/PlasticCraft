@@ -6,7 +6,7 @@ import net.minecraft.src.forge.ITextureProvider;
 public class BlockMicrowave extends BlockContainer implements ITextureProvider {
   public static int plasticIndex = 0;
   private static int microwaveFront = 8;
-  public static int microwaveAnim = 17;
+  public static int microwaveAnim = 18;
   private static int spr[] = new int[3];
   private final boolean isCooking;
   private static boolean keepMicrowaveInventory = false;
