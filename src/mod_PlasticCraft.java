@@ -62,10 +62,11 @@ public class mod_PlasticCraft extends BaseMod {
   public static Item itemPlasticBucketM = new ItemPlasticBucket(props.getInt("itemPlasticMilkBucket") - iOff, -1).setIconIndex(20).setItemName("pPlasticMilkBucket").setContainerItem(itemPlasticBucket);
   public static Item itemPlasticBucketL = new Item_PC(props.getInt("itemPlasticLatexBucket") - iOff).setIconIndex(21).setItemName("pPlasticLatexBucket");
   public static Item itemPlasticBottle = new ItemPlasticBucket(props.getInt("itemEmptyBottle") - iOff, 0).setIconIndex(22).setItemName("pEmptyBottle");
-  public static Item itemPlasticBottleW = new ItemConsumable(props.getInt("itemWaterBottle") - iOff, 3, 0.6F, false).setIconIndex(23).setItemName("pWaterBottle");
-  public static Item itemPlasticBottleM = new ItemConsumable(props.getInt("itemMilkBottle") - iOff, 6, 0.6F, true).setIconIndex(24).setItemName("pMilkBottle");
+  public static Item itemPlasticBottleW = new ItemConsumable(props.getInt("itemWaterBottle") - iOff, 3, 0.8F, false, false).setIconIndex(23).setItemName("pWaterBottle");
+  public static Item itemPlasticBottleM = new ItemConsumable(props.getInt("itemMilkBottle") - iOff, 6, 0.6F, true, false).setIconIndex(24).setItemName("pMilkBottle");
   public static Item itemNeedle = new Item_PC(props.getInt("itemNeedle") - iOff).setIconIndex(25).setItemName("pNeedle");
-  public static Item itemNeedleHealth = new ItemConsumable(props.getInt("itemRedNeedle") - iOff, 0, 0, true).setIconIndex(26).setItemName("pHealthNeedle");
+  public static Item itemNeedleHealth = new ItemConsumable(props.getInt("itemRedNeedle") - iOff, 0, 0, true, false).setIconIndex(26).setItemName("pHealthNeedle");
+  public static Item itemJello = new ItemConsumable(props.getInt("itemJello") - iOff, 6, 0.7F, false, true).setIconIndex(34).setItemName("pJello");
   // Tools and Armor
   public static Item armorNightGoggles = new ItemArmor_PC(props.getInt("armorNightVisionGoggles") - iOff, mod_PlasticCraft.UTILITY, ModLoader.AddArmor("NVGoggles"), 0, false).setIconIndex(27).setItemName("pNVGoggles");
   public static Item armorKevlarVest = new ItemArmor_PC(props.getInt("armorKevlarVest") - iOff, mod_PlasticCraft.KEVLAR, ModLoader.AddArmor("Kevlar"), 1, true).setIconIndex(28).setItemName("pKevlarVest");
@@ -192,6 +193,7 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(itemPlasticBottleM, "Milk Bottle");
     ModLoader.AddName(itemNeedle, "Needle");
     ModLoader.AddName(itemNeedleHealth, "Health Needle");
+    ModLoader.AddName(itemJello, "Jello");
     ModLoader.AddName(armorNightGoggles, "Night-Vision Goggles");
     ModLoader.AddName(armorKevlarVest, "Kevlar Vest");
     ModLoader.AddName(armorKevlarLegs, "Kevlar Pants");
@@ -289,6 +291,10 @@ public class mod_PlasticCraft extends BaseMod {
       'P', itemPlasticClear, 'G', Block.glass, 'I', Item.ingotIron });
     ModLoader.AddRecipe(new ItemStack(itemNeedleHealth), new Object[] { " A ", "RFR", " N ", 
       'N', itemNeedle, 'R', Item.redstone, 'F', Block.plantRed, 'A', Item.speckledMelon });
+    ModLoader.AddShapelessRecipe(new ItemStack(itemJello), new Object[] { 
+      new ItemStack(itemPlasticBucketW), new ItemStack(Item.sugar), new ItemStack(itemGelatin) });
+    ModLoader.AddShapelessRecipe(new ItemStack(itemJello), new Object[] { 
+      new ItemStack(Item.bucketWater), new ItemStack(Item.sugar), new ItemStack(itemGelatin) });
     
     // Tools and Armor
     ModLoader.AddRecipe(new ItemStack(armorNightGoggles), new Object[] { "SSS", "S S", "PCP", 
@@ -504,6 +510,7 @@ public class mod_PlasticCraft extends BaseMod {
     props.getInt("itemMilkBottle", 1025);
     props.getInt("itemNeedle", 1026);
     props.getInt("itemRedNeedle", 1027);
+    props.getInt("itemJello", 1028);
     
     props.getInt("armorNightVisionGoggles", 1040);
     props.getInt("armorKevlarVest", 1041);
