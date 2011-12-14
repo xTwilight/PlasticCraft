@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.util.*;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.forge.*;
 
 import org.lwjgl.opengl.GL11;
 
 public class mod_PlasticCraft extends BaseMod {
-  public String getVersion() { return "v2.3 (for 1.0.0)"; }
+  public String getVersion() { return "v2.4 (for 1.0.0)"; }
   public static String modDir = "/TehKrush/PlasticCraft/";
   private static String getAppdata() { return Minecraft.getMinecraftDir().getPath(); }
   private static Props props = new Props((new File((new StringBuilder()).append(getAppdata()).append("/config/").append("mod_PlasticCraft.props").toString())).getPath());
@@ -38,6 +39,7 @@ public class mod_PlasticCraft extends BaseMod {
   public static Block blockTrampoline = new BlockTrampoline(props.getInt("blockTrampoline"));
   public static Block blockAccelerator = new BlockAccelerator(props.getInt("blockAccelerator"));
   public static Block blockExtractor = new BlockExtract(props.getInt("blockExtractor"));
+  public static Block blockRope = new BlockRope(props.getInt("blockRope"));
   // Items
   public static Item itemPlastic = new Item_PC(props.getInt("itemPlasticBall") - iOff).setIconIndex(0).setItemName("pPlasticBall");
   public static Item itemPlasticClear = new Item_PC(props.getInt("itemClearBall") - iOff).setIconIndex(1).setItemName("pClearBall");
@@ -57,6 +59,7 @@ public class mod_PlasticCraft extends BaseMod {
   public static Item itemSilicon = new Item_PC(props.getInt("itemSilicon") - iOff).setIconIndex(15).setItemName("pSilicon");
   public static Item itemPlasticBoat = new ItemPlasticBoat(props.getInt("itemPlasticBoat") - iOff).setIconIndex(16).setItemName("pBoat");
   public static Item itemC4Defuser = new ItemC4Defuser(props.getInt("itemC4Defuser") - iOff).setIconIndex(17).setItemName("pC4Defuser");
+  public static Item itemRope = new ItemRope(props.getInt("itemRope") - iOff).setIconIndex(35).setItemName("pRope");
   public static Item itemPlasticBucket = new ItemPlasticBucket(props.getInt("itemPlasticBucket") - iOff, 0).setIconIndex(18).setItemName("pPlasticBucket");
   public static Item itemPlasticBucketW = new ItemPlasticBucket(props.getInt("itemPlasticWaterBucket") - iOff, Block.waterMoving.blockID).setIconIndex(19).setItemName("pPlasticWaterBucket").setContainerItem(itemPlasticBucket);
   public static Item itemPlasticBucketM = new ItemPlasticBucket(props.getInt("itemPlasticMilkBucket") - iOff, -1).setIconIndex(20).setItemName("pPlasticMilkBucket").setContainerItem(itemPlasticBucket);
@@ -139,6 +142,7 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.RegisterBlock(blockTrampoline);
     ModLoader.RegisterBlock(blockAccelerator);
     ModLoader.RegisterBlock(blockExtractor);
+    ModLoader.RegisterBlock(blockRope);
     ModLoader.AddName(new ItemStack(Item.itemsList[blockPlastic.blockID], 1, 0), "Plain Plastic");
     ModLoader.AddName(new ItemStack(Item.itemsList[blockPlastic.blockID], 1, 1), "Orange Plastic");
     ModLoader.AddName(new ItemStack(Item.itemsList[blockPlastic.blockID], 1, 2), "Magenta Plastic");
@@ -184,6 +188,7 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(itemSilicon, "Rough Silicon");
     ModLoader.AddName(itemPlasticBoat, "Plastic Boat");
     ModLoader.AddName(itemC4Defuser, "Handheld C4 Defuser");
+    ModLoader.AddName(itemRope, "Synthetic Rope");
     ModLoader.AddName(itemPlasticBucket, "Plastic Bucket");
     ModLoader.AddName(itemPlasticBucketW, "Plastic Water Bucket");
     ModLoader.AddName(itemPlasticBucketM, "Plastic Milk Bucket");
@@ -275,6 +280,8 @@ public class mod_PlasticCraft extends BaseMod {
       'P', blockPlastic, 'G', new ItemStack(blockPlexiglass, 1, 0) });
     ModLoader.AddRecipe(new ItemStack(itemC4Defuser), new Object[] { "PBP", "RCG", "IS ", 
       'P', itemPlastic, 'R', Item.redstone, 'I', Item.ingotIron, 'C', itemIntegratedCircuit, 'G', Block.glass, 'B', Block.button, 'S', itemBattery });
+    ModLoader.AddRecipe(new ItemStack(itemRope), new Object[] { "/I", "SS", "SS", 
+      'S', blockSynthCloth, '/', itemSynthString, 'I', Item.ingotIron });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBucket), new Object[] { "P P", " P ", 
       'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(itemPlasticBottle), new Object[] { "P  ", " P ", "  P", 
@@ -482,6 +489,7 @@ public class mod_PlasticCraft extends BaseMod {
     props.getInt("blockTrampoline", 134);
     props.getInt("blockAccelerator", 135);
     props.getInt("blockExtractor", 136);
+    props.getInt("blockRope", 137);
     
     props.getInt("itemPlasticBall", 1001);
     props.getInt("itemClearBall", 1002);
@@ -511,6 +519,7 @@ public class mod_PlasticCraft extends BaseMod {
     props.getInt("itemNeedle", 1026);
     props.getInt("itemRedNeedle", 1027);
     props.getInt("itemJello", 1028);
+    props.getInt("itemRope", 1029);
     
     props.getInt("armorNightVisionGoggles", 1040);
     props.getInt("armorKevlarVest", 1041);
