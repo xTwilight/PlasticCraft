@@ -28,7 +28,7 @@ public class RenderC4Primed extends Render {
         
     float f3 = (1.0F - (((float)entityc4primed.fuse - f1) + 1.0F) / 100F) * 0.8F;
     loadTexture(mod_PlasticCraft.modDir + "pc_terrain.png");
-    blockRenderer.renderBlockOnInventory(mod_PlasticCraft.blockC4, 0, 1.0F);
+    blockRenderer.renderBlockAsItem(mod_PlasticCraft.blockC4, 0, 1.0F);
     
     if ((entityc4primed.fuse / 5) % 2 == 0) {
       GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
@@ -36,7 +36,7 @@ public class RenderC4Primed extends Render {
       GL11.glEnable(3042 /*GL_BLEND*/);
       GL11.glBlendFunc(770, 772);
       GL11.glColor4f(1.0F, 1.0F, 1.0F, f3);
-      blockRenderer.renderBlockOnInventory(mod_PlasticCraft.blockC4, 0, 1.0F);
+      blockRenderer.renderBlockAsItem(mod_PlasticCraft.blockC4, 0, 1.0F);
       GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
       GL11.glDisable(3042 /*GL_BLEND*/);
       GL11.glEnable(2896 /*GL_LIGHTING*/);

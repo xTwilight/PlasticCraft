@@ -16,7 +16,7 @@ public class mod_PlasticCraft extends BaseMod {
   private static void console(String s) { System.out.println("[PlasticCraft] " + s); }
   public static int iOff = 256;
   
-  private static OreHandler oreHandler;
+  private static mod_PlasticCraft.OreHandler oreHandler = new mod_PlasticCraft.OreHandler();
   
   public static String itemSheet = modDir + "pc_items.png";
   public static String blockSheet = modDir + "pc_terrain.png";
@@ -111,6 +111,9 @@ public class mod_PlasticCraft extends BaseMod {
     addRecipes();
     console("Registering recipes.");
     
+    MinecraftForge.registerOreHandler(oreHandler);
+    MinecraftForge.registerOre("itemRubber", new ItemStack(itemRubber, 1));
+        
     MinecraftForge.setToolClass(toolPlasticShovel, "shovel", 1);
     MinecraftForge.setToolClass(toolPlasticPickaxe, "pickaxe", 1);
     MinecraftForge.setToolClass(toolPlasticAxe, "axe", 1);
@@ -205,9 +208,6 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(toolPlasticShovel, "Plastic Shovel");
     ModLoader.AddName(toolPlasticPickaxe, "Plastic Pickaxe");
     ModLoader.AddName(toolPlasticAxe, "Plastic Axe");
-    
-    MinecraftForge.registerOreHandler(oreHandler);
-    MinecraftForge.registerOre("rubber", new ItemStack(itemRubber));
   }
 
   public static void addRecipes() {
@@ -541,7 +541,7 @@ public class mod_PlasticCraft extends BaseMod {
   
   static class OreHandler implements IOreHandler {
     public void registerOre(String oreClass, ItemStack item) {
-      if (oreClass.equals("rubber")) {
+      if (oreClass.equals("itemRubber")) {
         ModLoader.AddRecipe(new ItemStack(blockTrampoline), new Object[] { "RRR", "WWW", 
           'R', item, 'W', Block.planks });
         ModLoader.AddRecipe(new ItemStack(blockAccelerator, 4), new Object[] { "RXR", "XSX", "RXR", 
