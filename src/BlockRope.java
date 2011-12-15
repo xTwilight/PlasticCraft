@@ -29,13 +29,15 @@ public class BlockRope extends Block_PC {
   }
 
   public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+    if (world.isAirBlock(i, j - 1, k))
+      world.setBlockAndMetadataWithNotify(i, j - 1, k, blockID, 1);
+  	
     if (world.isAirBlock(i, j + 1, k)) {
       if (world.getBlockMetadata(i, j, k) == 0) {
         float f = 0.7F;
-        Random random = new Random();
-        double d = (double)(random.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-        double d1 = (double)(random.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-        double d2 = (double)(random.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+        double d = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+        double d1 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+        double d2 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
         ItemStack itemstack = new ItemStack(mod_PlasticCraft.itemRope, 1);
         EntityItem entityitem = new EntityItem(world, (double)i + d, (double)j + d1, (double)k + d2, itemstack);
         entityitem.delayBeforeCanPickup = 10;
@@ -50,13 +52,9 @@ public class BlockRope extends Block_PC {
         if (world.getBlockId(i, j - i1, k) == blockID)
           world.setBlockWithNotify(i, j - i1, k, 0);
         else if (world.getBlockId(i, j - i1, k) != blockID)
-        	removeBelow = false;
+          removeBelow = false;
         i1++;
       }
-    }
-    
-    if (world.isAirBlock(i, j - 1, k)) {
-    	world.setBlockAndMetadataWithNotify(i, j - 1, k, blockID, 1);
     }
     
     super.canPlaceBlockOnSide(world, i, j, k, l);
@@ -64,18 +62,18 @@ public class BlockRope extends Block_PC {
 
   public void onBlockRemoval(World world, int i, int j, int k) {
     boolean flag = true;
-    int i1 = 1;
+    int l = 1;
           
-    for (int l1=1; flag; l1++) {
-      if (world.getBlockId(i, j - i1, k) == blockID)
-       world.setBlockWithNotify(i, j - i1, k, 0);
-      else if (world.getBlockId(i, j - i1, k) != blockID)
+    for (int m=1; flag; m++) {
+      if (world.getBlockId(i, j - l, k) == blockID)
+       world.setBlockWithNotify(i, j - l, k, 0);
+      else if (world.getBlockId(i, j - l, k) != blockID)
         flag = false;
               
-      i1++;
-      if (world.getBlockId(i, j + l1, k) == blockID)
-        world.setBlockWithNotify(i, j + l1, k, 0);
-      else if (world.getBlockId(i, j + l1, k) != blockID)
+      l++;
+      if (world.getBlockId(i, j + m, k) == blockID)
+        world.setBlockWithNotify(i, j + m, k, 0);
+      else if (world.getBlockId(i, j + m, k) != blockID)
         flag = false;
     }
   }
@@ -89,7 +87,7 @@ public class BlockRope extends Block_PC {
   }
   
   public int idDropped(int i, Random random, int meta) {
-  	if (meta == 0) return mod_PlasticCraft.itemRope.shiftedIndex;
-  	return 0;
+    if (meta == 0) return mod_PlasticCraft.itemRope.shiftedIndex;
+    return 0;
   }
 }

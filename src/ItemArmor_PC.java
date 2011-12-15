@@ -7,7 +7,6 @@ public class ItemArmor_PC extends ItemArmor implements ITextureProvider {
 	
   public ItemArmor_PC(int id, EnumArmorMaterial material, int texture, int type, boolean kevlar) {
     super(id, material, texture, type);
-    setFull3D();
     isKevlar = kevlar;
   }
 	

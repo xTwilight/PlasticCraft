@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.util.*;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.forge.*;
-
 import org.lwjgl.opengl.GL11;
 
 public class mod_PlasticCraft extends BaseMod {
@@ -17,6 +15,8 @@ public class mod_PlasticCraft extends BaseMod {
   private static Props props = new Props((new File((new StringBuilder()).append(getAppdata()).append("/config/").append("mod_PlasticCraft.props").toString())).getPath());
   private static void console(String s) { System.out.println("[PlasticCraft] " + s); }
   public static int iOff = 256;
+  
+  private static OreHandler oreHandler;
   
   public static String itemSheet = modDir + "pc_items.png";
   public static String blockSheet = modDir + "pc_terrain.png";
@@ -101,13 +101,11 @@ public class mod_PlasticCraft extends BaseMod {
     Item.swordDiamond, Item.shovelDiamond, Item.pickaxeDiamond, Item.axeDiamond, Item.hoeDiamond, Item.helmetDiamond, Item.plateDiamond, Item.legsDiamond, Item.bootsDiamond
   }));
   
-  public void ModsLoaded() {
-  	MinecraftForge.versionDetectStrict("PlasticCraft", 1, 2, 1);
+  public void load() {
+  	MinecraftForge.versionDetect("PlasticCraft", 1, 2, 1);
     MinecraftForgeClient.preloadTexture(itemSheet);
     MinecraftForgeClient.preloadTexture(blockSheet);
-  }
-  
-  public void load() {
+    
     registerItems();
     console("Registering items.");
     addRecipes();
@@ -143,6 +141,7 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.RegisterBlock(blockAccelerator);
     ModLoader.RegisterBlock(blockExtractor);
     ModLoader.RegisterBlock(blockRope);
+    
     ModLoader.AddName(new ItemStack(Item.itemsList[blockPlastic.blockID], 1, 0), "Plain Plastic");
     ModLoader.AddName(new ItemStack(Item.itemsList[blockPlastic.blockID], 1, 1), "Orange Plastic");
     ModLoader.AddName(new ItemStack(Item.itemsList[blockPlastic.blockID], 1, 2), "Magenta Plastic");
@@ -206,6 +205,9 @@ public class mod_PlasticCraft extends BaseMod {
     ModLoader.AddName(toolPlasticShovel, "Plastic Shovel");
     ModLoader.AddName(toolPlasticPickaxe, "Plastic Pickaxe");
     ModLoader.AddName(toolPlasticAxe, "Plastic Axe");
+    
+    MinecraftForge.registerOreHandler(oreHandler);
+    MinecraftForge.registerOre("rubber", new ItemStack(itemRubber));
   }
 
   public static void addRecipes() {
@@ -226,10 +228,6 @@ public class mod_PlasticCraft extends BaseMod {
       'P', itemPlastic });
     ModLoader.AddRecipe(new ItemStack(blockMicrowaveIdle), new Object[] { "IPI", "GSG", "IPI", 
       'P', blockPlastic, 'I', Item.ingotIron, 'G', Block.glass, 'S', itemIntegratedCircuit });
-    ModLoader.AddRecipe(new ItemStack(blockTrampoline), new Object[] { "RRR", "WWW", 
-      'R', itemRubber, 'W', Block.planks });
-    ModLoader.AddRecipe(new ItemStack(blockAccelerator, 4), new Object[] { "RXR", "XSX", "RXR", 
-      'R', itemRubber, 'X', Item.redstone, 'S', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(blockExtractor), new Object[] { "PXP", "PFP", "PEP", 
       'P', blockPlastic, 'F', Block.stoneOvenIdle, 'E', blockTap, 'X', itemIntegratedCircuit });
     
@@ -266,8 +264,6 @@ public class mod_PlasticCraft extends BaseMod {
       new ItemStack(Item.porkRaw), new ItemStack(Item.bowlEmpty) });
     ModLoader.AddShapelessRecipe(new ItemStack(itemBowlGelatin), new Object[] { 
       new ItemStack(Item.leather), new ItemStack(Item.bowlEmpty) });
-    ModLoader.AddRecipe(new ItemStack(itemDuctTape, 4), new Object[] { "RRR", "GGG", 
-      'R', itemRubber, 'G', itemPlasticGoo });
     ModLoader.AddRecipe(new ItemStack(itemPlexidoor), new Object[] { "PP", "PP", "PP", 
       'P', new ItemStack(blockPlexiglass, 1, 0) });
     ModLoader.AddRecipe(new ItemStack(itemBattery), new Object[] { "III", "RBR", "LLL", 
@@ -310,8 +306,6 @@ public class mod_PlasticCraft extends BaseMod {
       'S', blockSynthCloth, '/', itemSynthString, 'I', Item.plateLeather });
     ModLoader.AddRecipe(new ItemStack(armorKevlarLegs), new Object[] { "SSS", "/I/", "SSS", 
       'S', blockSynthCloth, '/', itemSynthString, 'I', Item.legsLeather });
-    ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { "O O", " C ", "R R", 
-      'R', itemRubber, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
     ModLoader.AddRecipe(new ItemStack(toolPlasticShovel), new Object[] { " P ", " / ", " / ", 
       'P', itemPlastic, '/', itemPlasticStick });
     ModLoader.AddRecipe(new ItemStack(toolPlasticPickaxe), new Object[] { "PPP", " / ", " / ", 
@@ -398,8 +392,8 @@ public class mod_PlasticCraft extends BaseMod {
   }
   
   public void AddRenderer(Map map) {
-    map.put(net.minecraft.src.EntityC4Primed.class, new RenderC4Primed());
-    map.put(net.minecraft.src.EntityPlasticBoat.class, new RenderPlasticBoat());
+    map.put(EntityC4Primed.class, new RenderC4Primed());
+    map.put(EntityPlasticBoat.class, new RenderPlasticBoat());
   }
   
   public void RegisterAnimation(Minecraft minecraft) {
@@ -543,6 +537,21 @@ public class mod_PlasticCraft extends BaseMod {
         return true;
     
     return false;
+  }
+  
+  static class OreHandler implements IOreHandler {
+    public void registerOre(String oreClass, ItemStack item) {
+      if (oreClass.equals("rubber")) {
+        ModLoader.AddRecipe(new ItemStack(blockTrampoline), new Object[] { "RRR", "WWW", 
+          'R', item, 'W', Block.planks });
+        ModLoader.AddRecipe(new ItemStack(blockAccelerator, 4), new Object[] { "RXR", "XSX", "RXR", 
+          'R', item, 'X', Item.redstone, 'S', itemIntegratedCircuit });
+        ModLoader.AddRecipe(new ItemStack(itemDuctTape, 4), new Object[] { "RRR", "GGG", 
+          'R', item, 'G', itemPlasticGoo });
+        ModLoader.AddRecipe(new ItemStack(armorFallBoots), new Object[] { "O O", " C ", "R R", 
+          'R', item, 'O', Block.obsidian, 'C', itemIntegratedCircuit });
+      }
+    }
   }
     
   static class Stun {
