@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.forge.*;
 import org.lwjgl.opengl.GL11;
 
-public class mod_PlasticCraft extends BaseMod {
+public class mod_PlasticCraft extends BaseModMp {
   public String getVersion() { return "v2.4 (for 1.0.0)"; }
   public static String modDir = "/TehKrush/PlasticCraft/";
   private static String getAppdata() { return Minecraft.getMinecraftDir().getPath(); }
